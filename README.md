@@ -1,8 +1,8 @@
 # deeplearning-repo-4
-딥러닝 프로젝트 4조. 객체 탐지, 예측, 회피 시스템
+딥러닝 프로젝트 4조.
 
 ### Infomation
-2024년 05월 21일 ~ 2024년 06월 12일
+2024년 06월 5일 ~ 2024년 06월 12일
 
 Lang :
 <img src="https://img.shields.io/badge/c++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white">
