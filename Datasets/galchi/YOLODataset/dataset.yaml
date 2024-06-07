@@ -1,0 +1,4 @@
+train: /Users/yohan/Desktop/dev_ws/DeepLearning_Project/project2/data/galchi/YOLODataset/images/train/
+val: /Users/yohan/Desktop/dev_ws/DeepLearning_Project/project2/data/galchi/YOLODataset/images/val/
+nc: 1
+names: ["galchi"]
