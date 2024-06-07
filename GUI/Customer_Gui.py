@@ -8,6 +8,7 @@ import resources_rc
 #import mysql.connector
 import re
 import datetime
+import db_connect
 
 
 from_class = uic.loadUiType("Customer_Gui.ui") [0]
@@ -51,20 +52,18 @@ class WindowClass(QMainWindow, from_class):
     def switch_to_SafetyPage(self):
         self.stackedWidget.setCurrentIndex(3)
 
-
-
     #def connect_mysql(self):
     #    self.remote = mysql.connector.connect(
     #        host = '',
     #        port = 3306,
     #        user = "",
     #        password = "",
-    #        database='' 
+    #        database=''
     #    )
 
+    def connect_mysql(self) :
+        self.remote = db_connect()
 
-                
-        
 if __name__ == "__main__" :
     app = QApplication(sys.argv)
     myWindows = WindowClass()
