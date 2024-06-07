@@ -333,7 +333,7 @@ QPushButton:checked{
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="Customer_Gui_btnFishlistPage_1">
+          <widget class="QPushButton" name="Customer_Gui_btnFishListPage_1">
            <property name="font">
             <font>
              <pointsize>15</pointsize>
@@ -362,14 +362,14 @@ QPushButton:checked{
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="Customer_Gui_btnFoodandGroceryPage_1">
+          <widget class="QPushButton" name="Customer_Gui_btnImageSearchPage_1">
            <property name="font">
             <font>
              <pointsize>15</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>safety</string>
+            <string>search</string>
            </property>
            <property name="icon">
             <iconset>
@@ -391,14 +391,14 @@ QPushButton:checked{
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="Customer_Gui_btnSportsandOutdoorsPage_1">
+          <widget class="QPushButton" name="Customer_Gui_btnsafetyPage_1">
            <property name="font">
             <font>
              <pointsize>15</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>search</string>
+            <string>safety</string>
            </property>
            <property name="icon">
             <iconset>
