@@ -11,7 +11,7 @@ import datetime
 #import db_connect
 
 
-from_class = uic.loadUiType("Customer_Gui.ui") [0]
+from_class = uic.loadUiType("./GUI/Customer_Gui.ui") [0]
 
 #class MySideBar(QMainWindow, Ui_MainWindow):
 class WindowClass(QMainWindow, from_class):
@@ -35,30 +35,40 @@ class WindowClass(QMainWindow, from_class):
         self.btn_safety_page_1.clicked.connect(self.switch_to_SafetyPage)
 
         # header 클릭 시 홈페이지 로드
-        self.btn_header.clicked.connect(self.switch_to_HomePage)
+        self.btn_header_1.clicked.connect(self.switch_to_HomePage)
+        self.btn_header_2.clicked.connect(self.switch_to_HomePage)
 
-        # 홈페이지의 오늘 거래가 위젯 페이지 로드
+        # 홈페이지 오늘 거래가 위젯 페이지 로드
         self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_1)
-        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_2)
-        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_3)
-        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_4)
-        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_5)
-        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_6)
-        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_7)
+        self.btn_today_price_stacked_widget_2.clicked.connect(self.switch_to_widget_page_2)
+        self.btn_today_price_stacked_widget_3.clicked.connect(self.switch_to_widget_page_3)
+        self.btn_today_price_stacked_widget_4.clicked.connect(self.switch_to_widget_page_4)
+        self.btn_today_price_stacked_widget_5.clicked.connect(self.switch_to_widget_page_5)
+        self.btn_today_price_stacked_widget_6.clicked.connect(self.switch_to_widget_page_6)
+        self.btn_today_price_stacked_widget_7.clicked.connect(self.switch_to_widget_page_7)
+
+        # 수산물 간편 가격 정보 페이지 to 수산물 세부 가격 정보 페이지
+        # self.btn_fish_list_page_to_detail_page_1.clicked.connect(self.switch_to_ㅇ_page_1)
+
+
 
 
     # 페이지 로드
     def switch_to_HomePage(self):
         self.stacked_widget_total_page.setCurrentIndex(0)
+        self.btn_header_2.hide()
 
     def switch_to_FishListPage(self):
         self.stacked_widget_total_page.setCurrentIndex(1)
+        self.btn_header_2.show()
 
     def switch_to_ImageSearchPage(self):
         self.stacked_widget_total_page.setCurrentIndex(2)
+        self.btn_header_2.show()
 
     def switch_to_SafetyPage(self):
         self.stacked_widget_total_page.setCurrentIndex(3)
+        self.btn_header_2.show()
 
     
     # 위젯 페이지 로드

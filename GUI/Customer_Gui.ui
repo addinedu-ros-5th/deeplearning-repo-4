@@ -101,17 +101,21 @@
            </spacer>
           </item>
           <item>
-           <spacer name="horizontalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+           <widget class="QPushButton" name="btn_header_2">
+            <property name="font">
+             <font>
+              <pointsize>15</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>66</width>
-              <height>20</height>
-             </size>
+            <property name="styleSheet">
+             <string notr="true">border: none;</string>
             </property>
-           </spacer>
+            <property name="text">
+             <string>LOGO</string>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="horizontalSpacer_4">
@@ -234,7 +238,7 @@ border: 2px solid #71a5de;
              </item>
             </layout>
            </widget>
-           <widget class="QPushButton" name="btn_header">
+           <widget class="QPushButton" name="btn_header_1">
             <property name="geometry">
              <rect>
               <x>120</x>
@@ -285,6 +289,9 @@ border: 2px solid #71a5de;
               <width>401</width>
               <height>251</height>
              </rect>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
             </property>
             <widget class="QWidget" name="home_widget_page_1">
              <widget class="QLabel" name="label_5">
@@ -442,8 +449,110 @@ border: 2px solid #71a5de;
                </item>
               </layout>
              </widget>
+             <widget class="QLabel" name="label_8">
+              <property name="geometry">
+               <rect>
+                <x>170</x>
+                <y>190</y>
+                <width>67</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>1</string>
+              </property>
+             </widget>
             </widget>
-            <widget class="QWidget" name="page_3"/>
+            <widget class="QWidget" name="home_widget_page_2">
+             <widget class="QLabel" name="label_9">
+              <property name="geometry">
+               <rect>
+                <x>90</x>
+                <y>90</y>
+                <width>67</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>2</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="home_widget_page_3">
+             <widget class="QLabel" name="label_10">
+              <property name="geometry">
+               <rect>
+                <x>200</x>
+                <y>90</y>
+                <width>67</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>3</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="home_widget_page_4">
+             <widget class="QLabel" name="label_12">
+              <property name="geometry">
+               <rect>
+                <x>230</x>
+                <y>70</y>
+                <width>67</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>4</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="home_widget_page_5">
+             <widget class="QLabel" name="label_13">
+              <property name="geometry">
+               <rect>
+                <x>260</x>
+                <y>80</y>
+                <width>67</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>5</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="home_widget_page_6">
+             <widget class="QLabel" name="label_14">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>120</y>
+                <width>67</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>6</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="home_widget_page_7">
+             <widget class="QLabel" name="label_15">
+              <property name="geometry">
+               <rect>
+                <x>180</x>
+                <y>100</y>
+                <width>67</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>7</string>
+              </property>
+             </widget>
+            </widget>
            </widget>
            <widget class="QPushButton" name="btn_today_price_stacked_widget_1">
             <property name="geometry">
@@ -593,6 +702,168 @@ border: 2px solid #71a5de;
            <property name="text">
             <string>list page</string>
            </property>
+          </widget>
+          <widget class="QWidget" name="widget_2" native="true">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>79</y>
+             <width>401</width>
+             <height>151</height>
+            </rect>
+           </property>
+           <widget class="QLabel" name="label_19">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>20</y>
+              <width>101</width>
+              <height>101</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="resources.qrc">:/image/resource/image/gajami.jpg</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_20">
+            <property name="geometry">
+             <rect>
+              <x>170</x>
+              <y>30</y>
+              <width>67</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>소</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_21">
+            <property name="geometry">
+             <rect>
+              <x>170</x>
+              <y>60</y>
+              <width>67</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>중</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_22">
+            <property name="geometry">
+             <rect>
+              <x>170</x>
+              <y>90</y>
+              <width>67</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>대</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="fish_list_page_large_price_1">
+            <property name="geometry">
+             <rect>
+              <x>220</x>
+              <y>90</y>
+              <width>67</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>10000</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="fish_list_page_medium_price_1">
+            <property name="geometry">
+             <rect>
+              <x>220</x>
+              <y>60</y>
+              <width>67</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>10000</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="fish_list_page_small_price_1">
+            <property name="geometry">
+             <rect>
+              <x>220</x>
+              <y>30</y>
+              <width>67</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>10000</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_26">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>90</y>
+              <width>67</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>원</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_27">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>30</y>
+              <width>67</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>원</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_28">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>60</y>
+              <width>67</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>원</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btn_fish_list_page_to_detail_page">
+            <property name="geometry">
+             <rect>
+              <x>340</x>
+              <y>60</y>
+              <width>41</width>
+              <height>25</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>&gt;</string>
+            </property>
+           </widget>
           </widget>
          </widget>
          <widget class="QWidget" name="safety_page">
