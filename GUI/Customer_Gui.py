@@ -20,13 +20,11 @@ class WindowClass(QMainWindow, from_class):
         self.setupUi(self)
         self.setWindowTitle("________")
 
-        #self.Customer_Gui_tablewidgetCartList.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch) 
-        
+        #self.Customer_Gui_tablewidgetCartList.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         #self.connect_mysql()
 
         #self.start_stock_label()
-    
 
         # 카테고리 클릭 시 해당 페이지 로드
         self.btn_home_page_1.clicked.connect(self.switch_to_HomePage)
