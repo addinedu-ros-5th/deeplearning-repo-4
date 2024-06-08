@@ -3,5 +3,7 @@
     <file>icon/search_icon.svg</file>
     <file>icon/menu_icon.svg</file>
   </qresource>
-  <qresource prefix="image"/>
+  <qresource prefix="image">
+    <file>resource/image/gajami.jpg</file>
+  </qresource>
 </RCC>
