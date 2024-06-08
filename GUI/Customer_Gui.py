@@ -8,7 +8,7 @@ import resources_rc
 #import mysql.connector
 import re
 import datetime
-import db_connect
+#import db_connect
 
 
 from_class = uic.loadUiType("Customer_Gui.ui") [0]
@@ -28,29 +28,60 @@ class WindowClass(QMainWindow, from_class):
         #self.start_stock_label()
     
 
-        #카테고리 클릭 시 해당 페이지 로드
-    
-        self.Customer_Gui_btnHomePage_1.clicked.connect(self.switch_to_HomePage)
-        self.Customer_Gui_btnFishListPage_1.clicked.connect(self.switch_to_FishListPage)
-        self.Customer_Gui_btnImageSearchPage_1.clicked.connect(self.switch_to_ImageSearchPage)
-        self.Customer_Gui_btnsafetyPage_1.clicked.connect(self.switch_to_SafetyPage)
+        # 카테고리 클릭 시 해당 페이지 로드
+        self.btn_home_page_1.clicked.connect(self.switch_to_HomePage)
+        self.btn_fish_list_page_1.clicked.connect(self.switch_to_FishListPage)
+        self.btn_image_search_page_1.clicked.connect(self.switch_to_ImageSearchPage)
+        self.btn_safety_page_1.clicked.connect(self.switch_to_SafetyPage)
 
-        #header 클릭 시 홈페이지 로드
-        self.Customer_Gui_btnHeader.clicked.connect(self.switch_to_HomePage)
+        # header 클릭 시 홈페이지 로드
+        self.btn_header.clicked.connect(self.switch_to_HomePage)
+
+        # 홈페이지의 오늘 거래가 위젯 페이지 로드
+        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_1)
+        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_2)
+        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_3)
+        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_4)
+        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_5)
+        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_6)
+        self.btn_today_price_stacked_widget_1.clicked.connect(self.switch_to_widget_page_7)
 
 
-
+    # 페이지 로드
     def switch_to_HomePage(self):
-        self.stackedWidget.setCurrentIndex(0)
+        self.stacked_widget_total_page.setCurrentIndex(0)
 
     def switch_to_FishListPage(self):
-        self.stackedWidget.setCurrentIndex(1)
+        self.stacked_widget_total_page.setCurrentIndex(1)
 
     def switch_to_ImageSearchPage(self):
-        self.stackedWidget.setCurrentIndex(2)
+        self.stacked_widget_total_page.setCurrentIndex(2)
 
     def switch_to_SafetyPage(self):
-        self.stackedWidget.setCurrentIndex(3)
+        self.stacked_widget_total_page.setCurrentIndex(3)
+
+    
+    # 위젯 페이지 로드
+    def switch_to_widget_page_1(self):
+        self.today_price_stacked_widget.setCurrentIndex(0)
+
+    def switch_to_widget_page_2(self):
+        self.today_price_stacked_widget.setCurrentIndex(1)
+
+    def switch_to_widget_page_3(self):
+        self.today_price_stacked_widget.setCurrentIndex(2)
+
+    def switch_to_widget_page_4(self):
+        self.today_price_stacked_widget.setCurrentIndex(3)
+    
+    def switch_to_widget_page_5(self):
+        self.today_price_stacked_widget.setCurrentIndex(4)
+
+    def switch_to_widget_page_6(self):
+        self.today_price_stacked_widget.setCurrentIndex(5)
+
+    def switch_to_widget_page_7(self):
+        self.today_price_stacked_widget.setCurrentIndex(6)
 
     #def connect_mysql(self):
     #    self.remote = mysql.connector.connect(
