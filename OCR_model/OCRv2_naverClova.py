@@ -29,34 +29,13 @@ headers = {
   'X-OCR-SECRET': secret_key
 }
 
-# 2024.06.08 code
-response = requests.request("POST", api_url, headers=headers, data = payload, files = files)
+response = requests.request("POST", api_url, headers=headers, data=payload, files=files)
 
+text = ""
 for i in response.json()['images'][0]['fields']:
-    text = i['inferText']
-    print(text)
+    text += i['inferText'] + '\n'
 
+with open('output.txt', 'w', encoding='utf-8') as file:
+    file.write(text)
 
-# # 2024.06.08 ChatGPT
-# response = requests.request("POST", api_url, headers=headers, data=payload, files=files)
-# response_data = response.json()
-
-# extracted_text = "\n".join([i['inferText'] for i in response_data['images'][0]['fields']])
-# print(extracted_text)
-
-# lines = extracted_text.split('\n')
-# details_start_index = lines.index('품목별 상세 내역') + 2
-# data = []
-
-# for line in lines[details_start_index:]:
-#     if '부적합 의심' in line:
-#         break
-#     parts = line.split()
-#     if len(parts) == 4:
-#         data.append(parts[1:])
-#     elif len(parts) > 4:
-#         combined_parts = [' '.join(parts[1:2]), parts[2], parts[3]]
-#         data.append(combined_parts)
-
-# df = pd.DataFrame(data, columns=['품목', '원산지', '검사결과'])
-# print(df)
+print("텍스트를 'output.txt' 파일에 저장했습니다.")
