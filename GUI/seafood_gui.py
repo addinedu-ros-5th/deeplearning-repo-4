@@ -15,6 +15,11 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import numpy as np
 import json
 
+import pandas as pd
+import mysql.connector
+from mysql.connector import Error
+from db_connect import DB_CONFIG
+
 from_class = uic.loadUiType("./GUI/seafood_gui.ui") [0]
 
 #class MySideBar(QMainWindow, Ui_MainWindow):
@@ -164,12 +169,23 @@ class WindowClass(QMainWindow, from_class):
                 self.btn_price_onoff.setText("off")
 
                 self.text_price.setText("test")
+                self.connect_to_database()
+                if connection.is_connected():
+                    self.text_price.setText("MySQL connection is connected")
+                query = """
+                SELECT * FROM auction_price_data ORDER BY date DESC LIMIT 5;
+                """
+                self.query_result = pd.DataFrame(self.search_query(query))
+                self.query_result.columns = ['species', 'origin', 'size', 'packaging', 'quantity', 'highest', 'lowest', 'average', 'date']
+                self.text_price.append(f"{self.query_result[1:]}")
             
             else:   #to stop
                 self.btn_price_status = False
                 self.btn_price_onoff.setText("on")
-
-                self.text_price.clear()
+                if connection.is_connected():
+                    connection.close()
+                    self.text_price.setText("MySQL connection is closed")
+                #self.text_price.clear()
 
         #else:
                 
@@ -190,6 +206,30 @@ class WindowClass(QMainWindow, from_class):
 #    def connect_mysql(self) :
 #        self.remote = db_connect()
 
+    def connect_to_database(self):
+        global connection, cursor
+        try:
+            connection = mysql.connector.connect(
+                host=DB_CONFIG['host'],
+                database=DB_CONFIG['database'],
+                user=DB_CONFIG['user'],
+                password=DB_CONFIG['password']
+            )
+
+            if connection.is_connected():
+                cursor = connection.cursor()
+                return connection
+
+        except Error as e:
+            print(f"Error: {e}")
+
+    def search_query(self, query) :
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        data_list = []
+        for row in rows :
+            data_list.append([*row])
+        return data_list
 
 
 class Camera(QThread):
