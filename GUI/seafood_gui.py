@@ -20,7 +20,21 @@ import mysql.connector
 from mysql.connector import Error
 from db_connect import DB_CONFIG
 
-from_class = uic.loadUiType("./GUI/seafood_gui.ui") [0]
+
+from ultralytics import YOLO
+from collections import defaultdict
+import os
+label_mapping = {
+    0: "우럭",
+    1: "갈치",
+    2: "가자미",
+    3: "도미",
+    4: "아귀",
+    5: "고등어"
+}
+
+
+from_class = uic.loadUiType("dlp_src/seafood_gui.ui") [0]
 
 #class MySideBar(QMainWindow, Ui_MainWindow):
 class WindowClass(QMainWindow, from_class):
@@ -43,12 +57,11 @@ class WindowClass(QMainWindow, from_class):
         self.btn_camera_status = False   #False:off, True:on
         self.btn_graph_status = False
         self.btn_price_status = False
+        self.load_image_status = False
 
         self.btn_camera_onoff.setText("on")
         self.btn_graph_onoff.setText("on")
         self.btn_price_onoff.setText("on")
-
-        #self.test_text_list = ["광어", "오징어", "전복"]
 
         self.btn_camera_onoff.clicked.connect(self.camera_onoff)
         self.btn_graph_onoff.clicked.connect(self.graph_onoff)
@@ -56,6 +69,8 @@ class WindowClass(QMainWindow, from_class):
         self.line_search.returnPressed.connect(self.search_bar)
         self.btn_price_onoff.clicked.connect(self.show_price)
         self.btn_table_price_search.clicked.connect(self.filtered_price_table)
+        self.btn_directory.clicked.connect(self.load_image)
+        self.btn_camera_caoture.clicked.connect(self.capture)
 
         self.camera.updateSignal.connect(self.camera_update)
         self.verticalLayout_graph.addWidget(self.canvas)
@@ -65,20 +80,63 @@ class WindowClass(QMainWindow, from_class):
 
         self.connect_to_database()
 
+        self.model = YOLO("/home/lmy/dev_ws/project/deeplearning/dlp_src/best.pt")
+
+        self.f = open("./segment_log.txt", "w+")
+        self.track_history = defaultdict(lambda: [])
+        self.having_label = []
+        self.pixmap_camera = None
+
 #==camera==
 
-    def camera_update(self):   #maybe input YOLO here..?
+    def camera_update(self):
         retval, self.image = self.video.read()
+        self.image = cv2.resize(self.image, (self.label_camera.width(), self.label_camera.height()))
         if retval:
-            self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
+            results_tracking = self.model.track(self.image, conf=0.5, persist=True)
+            if results_tracking is not None and len(results_tracking) > 0 and results_tracking[0] is not None and results_tracking[0].boxes is not None:
+                boxes = results_tracking[0].boxes.xywh.cpu()
+                track_ids = []
+                
+                for box in results_tracking[0].boxes:
+                    if box.id is not None:
+                        track_ids.append(box.id)
+                        label = int(box.cls.item())
+                        if label in label_mapping:
+                            label_name = label_mapping[label]
+                            
+                            if label_name not in self.having_label:                    
+                                
+                                self.having_label.append(label_name)
+                            
+                self.line_detect.setText(', '.join(self.having_label))
+                print(self.having_label)
 
-            h, w, c = self.image.shape
-            qimage = QImage(self.image.data, w, h, w*c, QImage.Format_RGB888)
 
-            self.pixmap = self.pixmap.fromImage(qimage)
-            self.pixmap_camera = self.pixmap.scaled(self.label_camera.width(), self.label_camera.height())
+                self.f.write('boxes : ' + str(boxes))
+                self.f.write('track_ids : ' + str(track_ids))
 
-            self.label_camera.setPixmap(self.pixmap_camera)
+                annotated_frame = results_tracking[0].plot()
+
+                height, width, channel = annotated_frame.shape   #opencv -> Qpixmap
+                bytesPerLine = 3 * width
+                QImg = QImage(annotated_frame.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
+                self.pixmap_camera = QPixmap.fromImage(QImg)
+
+                self.label_camera.setPixmap(self.pixmap_camera)
+
+                for box, track_id in zip(boxes, track_ids):
+                    x, y, w, h = box
+                    track = self.track_history[track_id]
+                    track.append((float(x), float(y)))
+                    if len(track) > 30: # retain 90 tracks for 90 frames
+                        track.pop(0)
+
+            else:
+                print("No objects found in the tracking results_tracking.")   # 객체가 없는 경우
+        else:
+            print("Failed to read video frame.")
+
 
     def camera_onoff(self):
         if self.btn_camera_status == False:   #to run
@@ -87,6 +145,7 @@ class WindowClass(QMainWindow, from_class):
             
             self.camera.start()
             self.camera.running = True
+            self.load_image_status = False
 
         else:   #self.btn_camera_status == True #to stop
             self.btn_camera_status = False
@@ -96,8 +155,76 @@ class WindowClass(QMainWindow, from_class):
             self.camera.running = False
             self.label_camera.clear()
 
-#==graph==
 
+    def load_image(self):
+        self.load_image_status = True
+        self.btn_camera_status = False
+        self.btn_camera_onoff.setText("on")
+
+        self.video.release
+        self.camera.running = False
+        
+        file = QFileDialog.getOpenFileName(filter="image (*.*)")
+        self.image = cv2.imread(file[0])
+        self.image = cv2.resize(self.image, (self.label_camera.width(), self.label_camera.height()))
+
+        results_detect = self.model.track(self.image, conf=0.5, persist=True)
+        boxes = results_detect[0].boxes.xywh.cpu()
+        track_ids = []
+
+        for box in results_detect[0].boxes:
+            if box.id is not None:
+                track_ids.append(box.id)
+                label = int(box.cls.item())
+                if label in label_mapping:
+                    label_name = label_mapping[label]
+                    
+                    if label_name not in self.having_label:                    
+                        
+                        self.having_label.append(label_name)
+                            
+        self.line_detect.setText(', '.join(self.having_label))
+        print(self.having_label)
+
+        self.f.write('boxes : ' + str(boxes))
+        self.f.write('track_ids : ' + str(track_ids))
+
+        annotated_frame = results_detect[0].plot()
+
+        height, width, channel = annotated_frame.shape
+        bytesPerLine = 3 * width
+        QImg = QImage(annotated_frame.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
+        self.pixmap_camera = QPixmap.fromImage(QImg)
+
+        self.label_camera.setPixmap(self.pixmap_camera)
+
+    def capture(self):
+        if self.btn_camera_status == True or self.load_image_status == True:
+
+            self.now = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            folder_path = "taken/"
+            input_filename = os.path.join(folder_path, self.now + ".jpg")
+
+            if not os.path.exists(folder_path):
+                os.makedirs(folder_path)
+
+            cap_qimage = self.pixmap_camera.toImage()
+            cap_qimage = cap_qimage.convertToFormat(QImage.Format_RGB32)
+
+            width = cap_qimage.width()
+            height = cap_qimage.height()
+            ptr = cap_qimage.bits()
+            ptr.setsize(height * width * 4)
+            arr = np.array(ptr).reshape(height, width, 4)
+            cv_image = cv2.cvtColor(arr, cv2.COLOR_BGRA2BGR)
+            
+
+            cv2.imwrite(input_filename, cv_image)
+        else:
+            print("camera off")
+
+        
+#==graph==
     def graph_onoff(self):
         if self.btn_graph_status == False:   #to run
             self.btn_graph_status = True
@@ -144,23 +271,13 @@ class WindowClass(QMainWindow, from_class):
 
 #==search==
 
-    # def search_bar(self):
-    #     search_text = self.line_search.text()
-    #     if search_text not in self.test_text_list:
-    #         QMessageBox.information(self, "check again", "입력된 텍스트의 정보가 없습니다.\n다시 입력해주세요.")
-
-    #         return
-    #     elif search_text in self.test_text_list:   #입력한 텍스트가 물고기 종류 배열?에 속할 때
-    #         print("test ok")
-    #         self.line_search.clear()
-
     def search_bar(self):
 
         searched_text = self.line_search.text()
         self.table_info.clear()
         self.line_search.clear()
 
-        with open("./GUI/fishlist.json", "r", encoding='utf-8') as file:
+        with open("dlp_src/fishlist.json", "r", encoding='utf-8') as file:
             fishlist = json.load(file)
 
         searched_fish_name = None

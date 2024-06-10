@@ -426,7 +426,7 @@ border: 2px solid #000000;
     <string>on</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -478,7 +478,7 @@ border: 2px solid #000000;
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="line_detect">
       <property name="minimumSize">
        <size>
         <width>520</width>
@@ -490,6 +490,9 @@ border: 2px solid #000000;
         <width>520</width>
         <height>25</height>
        </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -535,7 +538,7 @@ border: 2px solid #000000;
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>650</x>
