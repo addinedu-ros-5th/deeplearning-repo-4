@@ -101,6 +101,7 @@ class WindowClass(QMainWindow, from_class):
             self.btn_graph_onoff.setText("off")
             
             self.canvas.setVisible(True)
+            self.connect_to_database()
             self.graph_draw()
             
         else:   #self.btn_graph_status == True   #to stop
@@ -110,15 +111,37 @@ class WindowClass(QMainWindow, from_class):
             self.canvas.setVisible(False)
 
     def graph_draw(self):   #test
-        x = np.arange(0, 100, 1)
-        y = np.sin(x)
+        query = """
+                SELECT
+                    species,
+                    DATE_FORMAT(date, '%Y-%m') AS month,
+                    SUM(quantity * average) AS total_amount,
+                    SUM(quantity) AS total_quantity,
+                    SUM(quantity * average) / SUM(quantity) AS monthly_average
+                FROM
+                    auction_price_data
+                WHERE
+                    species LIKE "(활)암꽃게" AND
+                    date BETWEEN '2015-01-01' AND '2023-12-31'
+                GROUP BY
+                    species,
+                    month
+                ORDER BY
+                    month;
+                """
+        self.columns, self.results = self.search_query(query)
+        self.df = pd.DataFrame(self.results)
+        self.df.columns = self.columns
+
+        x = self.df['month']
+        y = self.df['monthly_average']
 
         ax = self.fig.add_subplot(111)
         ax.plot(x, y, label="sin")
         ax.set_xlabel("x")
         ax.set_xlabel("y")
 
-        ax.set_title("my sin graph")
+        ax.set_title("my graph")
         ax.legend()
         self.canvas.draw()
 
@@ -161,7 +184,6 @@ class WindowClass(QMainWindow, from_class):
 
 
 #==price==
-
     def show_price(self):
         if self.btn_camera_status == False:
             if self.btn_price_status == False:   #to run
@@ -174,7 +196,6 @@ class WindowClass(QMainWindow, from_class):
                 query = """
                 SELECT * FROM auction_price_data ORDER BY date DESC LIMIT 5;
                 """
-                self.query_result = pd.DataFrame(self.search_query(query))
                 columns, results = self.search_query(query)
                 if results:
                     self.display_table_data(self.table_price, columns, results)
@@ -212,7 +233,7 @@ class WindowClass(QMainWindow, from_class):
                 columns, results = self.search_query(query)
                 if results:
                     self.display_table_data(self.table_test_result, columns, results)
-                    connection.close()
+                    #connection.close()
 
 #==========================
 
