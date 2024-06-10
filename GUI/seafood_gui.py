@@ -226,6 +226,46 @@ class WindowClass(QMainWindow, from_class):
 
 #==========================
 
+    ####
+    # Usage :
+    #   table = "auction_price_data"
+    #   species = ["넙치", "암꽃게"]
+    #   size = "대"
+    #   start_date = "2020-01-01"
+    #   end_date = "2023-12-31"
+    #   origins = ["태안"]
+    #   keywords = ["활"]
+    #   sql_query = generate_query(table, species, size, start_date, end_date, origins, keywords)
+    #   print(sql_query)
+
+    def generate_query(table, species=None, size=None, start_date=None, end_date=None, origins=None, keywords=None):
+        base_query = f"SELECT * FROM {table} WHERE"
+        conditions = []
+
+        if keywords: # 활, 냉, 선
+            keywords_condition = " OR ".join([f"species LIKE '({keyword})%'" for keyword in keywords])
+            conditions.append(f"({keywords_condition})")
+
+        if species: # 넙치, 암꽃게, 오징어
+            color_condition = " OR ".join([f"species LIKE '%{specie}%'" for specie in species])
+            conditions.append(f"({color_condition})")
+
+        if size:    # 대, 중, 소, kg, box
+            conditions.append(f"size = '{size}'")
+
+        if start_date and end_date: # 2024-06-09
+            if start_date > end_date:
+                raise ValueError("Start date cannot be after end date")
+            conditions.append(f"date BETWEEN '{start_date}' AND '{end_date}'")
+
+        if origins: #태안, 목포, 제주
+            origin_condition = " OR ".join([f"origin = '{origin}'" for origin in origins])
+            conditions.append(f"({origin_condition})")
+
+        query = f"{base_query} {' AND '.join(conditions)} ORDER BY date DESC LIMIT 100"
+        return query
+    ####
+
     def connect_to_database(self):
         global connection, cursor
         try:
@@ -248,19 +288,9 @@ class WindowClass(QMainWindow, from_class):
         columns = cursor.column_names
         results = cursor.fetchall()
         return columns, results
-    
-    def make_query(self, table='auction_price_data', status, species, origin, start_date='2024-01-01', end_date='2024-06') :
 
-        query_select = 'SELECT '
-        query_from = 'FROM ' + table
-        query_where = status + species + origin + start_date + end_date
-        if query_where != None :
-            query_where = 'WHERE ' + query_where
-        query_group = 'GROUP BY '
-        query_order = 'ORDER BY '
-        query_limit = 'LIMIT '
-        query = query_select + query_from + query_where + query_group + query_order + query_limit
-        return query
+
+
 class Camera(QThread):
     updateSignal = pyqtSignal()
 
