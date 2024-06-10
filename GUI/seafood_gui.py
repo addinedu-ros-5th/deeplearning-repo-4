@@ -186,17 +186,16 @@ class WindowClass(QMainWindow, from_class):
             if self.btn_price_status == False:   #to run
                 self.btn_price_status = True
                 self.btn_price_onoff.setText("off")
-                #if connection.is_connected():
-                    #self.text_price.setText("MySQL connection is connected")
+                if not connection.is_connected():
+                    self.connect_to_database()
                 query = """
-                SELECT * FROM auction_price_data ORDER BY date DESC LIMIT 5;
+                SELECT * FROM auction_price_data ORDER BY date DESC LIMIT 10;
                 """
                 columns, results = self.search_query(query)
                 if results:
                     self.display_table_data(self.table_price, columns, results)
                 else:
                     print("No data found.")
-
                 self.show_test_result()
 
             else:   #to stop
@@ -204,7 +203,7 @@ class WindowClass(QMainWindow, from_class):
                 self.btn_price_onoff.setText("on")
                 if connection.is_connected():
                     connection.close()
-                self.display_table_data.clear()
+                self.table_price.clear()
 
     def display_table_data(self, table, columns, results):
         table.setRowCount(len(results))
