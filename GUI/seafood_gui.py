@@ -297,18 +297,7 @@ class WindowClass(QMainWindow, from_class):
         results = cursor.fetchall()
         return columns, results
     
-    def make_query(self, table='auction_price_data', status, species, origin, start_date='2024-01-01', end_date='2024-06') :
-
-        query_select = 'SELECT '
-        query_from = 'FROM ' + table
-        query_where = status + species + origin + start_date + end_date
-        if query_where != None :
-            query_where = 'WHERE ' + query_where
-        query_group = 'GROUP BY '
-        query_order = 'ORDER BY '
-        query_limit = 'LIMIT '
-        query = query_select + query_from + query_where + query_group + query_order + query_limit
-        return query
+    
 class Camera(QThread):
     updateSignal = pyqtSignal()
 
