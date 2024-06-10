@@ -177,25 +177,42 @@ class WindowClass(QMainWindow, from_class):
                 self.query_result = pd.DataFrame(self.search_query(query))
                 columns, results = self.search_query(query)
                 if results:
-                    self.display_data(columns, results)
+                    self.display_table_data(self.table_price, columns, results)
                 else:
                     print("No data found.")
+
+                self.show_test_result()
 
             else:   #to stop
                 self.btn_price_status = False
                 self.btn_price_onoff.setText("on")
                 if connection.is_connected():
                     connection.close()
-                self.table_price.clear()
+                self.display_table.clear()
 
-    def display_data(self, columns, results):
-        self.table_price.setRowCount(len(results))
-        self.table_price.setColumnCount(len(columns))
-        self.table_price.setHorizontalHeaderLabels(columns)
+    def display_table_data(self, table, columns, results):
+        table.setRowCount(len(results))
+        table.setColumnCount(len(columns))
+        table.setHorizontalHeaderLabels(columns)
 
         for row_idx, row_data in enumerate(results):
             for col_idx, col_data in enumerate(row_data):
-                self.table_price.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))
+                table.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))
+
+#==test==
+
+    def show_test_result(self):
+                self.connect_to_database()
+                #if connection.is_connected():
+                    #self.text_price.setText("MySQL connection is connected")
+                query = """
+                SELECT * FROM radioactive_test1;
+                """
+                self.query_result = pd.DataFrame(self.search_query(query))
+                columns, results = self.search_query(query)
+                if results:
+                    self.display_table_data(self.table_test_result, columns, results)
+                    connection.close()
 
 #==========================
 
