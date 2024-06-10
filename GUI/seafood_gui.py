@@ -18,7 +18,7 @@ import json
 import pandas as pd
 import mysql.connector
 from mysql.connector import Error
-#from db_connect import DB_CONFIG
+from db_connect import DB_CONFIG
 
 
 from ultralytics import YOLO
@@ -78,7 +78,7 @@ class WindowClass(QMainWindow, from_class):
         self.camera.running = False
         self.camera.start()
 
-#        self.connect_to_database()
+        self.connect_to_database()
 
         self.model = YOLO("Fish_model/yolov8n.pt")
 
@@ -390,28 +390,28 @@ class WindowClass(QMainWindow, from_class):
         return query
     ####
 
-    # def connect_to_database(self):
-    #     global connection, cursor
-    #     try:
-    #         connection = mysql.connector.connect(
-    #             host=DB_CONFIG['host'],
-    #             database=DB_CONFIG['database'],
-    #             user=DB_CONFIG['user'],
-    #             password=DB_CONFIG['password']
-    #         )
+    def connect_to_database(self):
+        global connection, cursor
+        try:
+            connection = mysql.connector.connect(
+                host=DB_CONFIG['host'],
+                database=DB_CONFIG['database'],
+                user=DB_CONFIG['user'],
+                password=DB_CONFIG['password']
+            )
 
-    #         if connection.is_connected():
-    #             cursor = connection.cursor()
-    #             return connection
+            if connection.is_connected():
+                cursor = connection.cursor()
+                return connection
 
-    #     except Error as e:
-    #         print(f"Error: {e}")
+        except Error as e:
+            print(f"Error: {e}")
 
-    # def search_query(self, query) :
-    #     cursor.execute(query)
-    #     columns = cursor.column_names
-    #     results = cursor.fetchall()
-    #     return columns, results
+    def search_query(self, query) :
+        cursor.execute(query)
+        columns = cursor.column_names
+        results = cursor.fetchall()
+        return columns, results
     
     
 class Camera(QThread):
