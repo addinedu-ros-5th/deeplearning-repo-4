@@ -26,6 +26,7 @@ share/python-wheels/
 *.egg
 MANIFEST
 GUI/db_connect.py
+GUI/resource/icon/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

@@ -1,9 +1,14 @@
 <RCC>
   <qresource prefix="icons">
-    <file>icon/search_icon.svg</file>
-    <file>icon/menu_icon.svg</file>
+    <file>resource/icon/icons8-toggle-60.png</file>
+    <file>resource/icon/icons8-toggle-48.png</file>
+    <file>resource/icon/icons8-camera-50 (1).png</file>
+    <file>resource/icon/icons8-clear-60.png</file>
+    <file>resource/icon/icons8-camera-50.png</file>
+    <file>resource/icon/icons8-directory-64.png</file>
   </qresource>
   <qresource prefix="image">
+    <file>resource/icon/icons8-search-50.png</file>
     <file>resource/image/gajami.jpg</file>
   </qresource>
 </RCC>

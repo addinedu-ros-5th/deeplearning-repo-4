@@ -28,7 +28,7 @@ class WindowClass(QMainWindow, from_class):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("________")
-        self.setFixedSize(1200, 1024)   #fix size
+        self.setFixedSize(1200, 900)   #fix size
 
         self.table_test_result.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
