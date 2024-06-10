@@ -55,6 +55,7 @@ class WindowClass(QMainWindow, from_class):
         self.btn_search.clicked.connect(self.search_bar)
         self.line_search.returnPressed.connect(self.search_bar)
         self.btn_price_onoff.clicked.connect(self.show_price)
+        self.btn_table_price_search.clicked.connect(self.filtered_price_table)
 
         self.camera.updateSignal.connect(self.camera_update)
         self.verticalLayout_graph.addWidget(self.canvas)
@@ -214,6 +215,13 @@ class WindowClass(QMainWindow, from_class):
             for col_idx, col_data in enumerate(row_data):
                 table.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))
 
+
+    def filtered_price_table(self):
+        region = self.cb_filter_region.currentText()
+        species = self.cb_filter_species.currentText()
+        origin = self.cb_filter_origin.currentText()
+        status =  self.cb_filter_status.currentText()
+
 #==test==
 
     def show_test_result(self):
@@ -261,6 +269,7 @@ class WindowClass(QMainWindow, from_class):
         query_limit = 'LIMIT '
         query = query_select + query_from + query_where + query_group + query_order + query_limit
         return query
+    
 class Camera(QThread):
     updateSignal = pyqtSignal()
 
