@@ -142,14 +142,14 @@ class WindowClass(QMainWindow, from_class):
 
         with open("./GUI/fishlist.json", "r", encoding='utf-8') as file:
             fishlist = json.load(file)
-        
+
         searched_fish_name = None
 
         for fish_name in fishlist:
             if fish_name["이름"] == searched_text or fish_name["초성"] == searched_text:
                 searched_fish_name = fish_name
                 break
-        
+
         if searched_fish_name:
             searched_fish_name_filtered_initial = {key: value for key, value in searched_fish_name.items() if key != "초성"}
             searched_fish_info_str = "\n".join([f"{key}: {value}" for key, value in searched_fish_name_filtered_initial.items()])
@@ -168,28 +168,34 @@ class WindowClass(QMainWindow, from_class):
                 self.btn_price_status = True
                 self.btn_price_onoff.setText("off")
 
-                self.text_price.setText("test")
                 self.connect_to_database()
-                if connection.is_connected():
-                    self.text_price.setText("MySQL connection is connected")
+                #if connection.is_connected():
+                    #self.text_price.setText("MySQL connection is connected")
                 query = """
                 SELECT * FROM auction_price_data ORDER BY date DESC LIMIT 5;
                 """
                 self.query_result = pd.DataFrame(self.search_query(query))
-                self.query_result.columns = ['species', 'origin', 'size', 'packaging', 'quantity', 'highest', 'lowest', 'average', 'date']
-                self.text_price.append(f"{self.query_result[1:]}")
-            
+                columns, results = self.search_query(query)
+                if results:
+                    self.display_data(columns, results)
+                else:
+                    print("No data found.")
+
             else:   #to stop
                 self.btn_price_status = False
                 self.btn_price_onoff.setText("on")
                 if connection.is_connected():
                     connection.close()
-                    self.text_price.setText("MySQL connection is closed")
-                #self.text_price.clear()
+                self.table_price.clear()
 
-        #else:
-                
+    def display_data(self, columns, results):
+        self.table_price.setRowCount(len(results))
+        self.table_price.setColumnCount(len(columns))
+        self.table_price.setHorizontalHeaderLabels(columns)
 
+        for row_idx, row_data in enumerate(results):
+            for col_idx, col_data in enumerate(row_data):
+                self.table_price.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))
 
 #==========================
 
@@ -225,12 +231,9 @@ class WindowClass(QMainWindow, from_class):
 
     def search_query(self, query) :
         cursor.execute(query)
-        rows = cursor.fetchall()
-        data_list = []
-        for row in rows :
-            data_list.append([*row])
-        return data_list
-
+        columns = cursor.column_names
+        results = cursor.fetchall()
+        return columns, results
 
 class Camera(QThread):
     updateSignal = pyqtSignal()
