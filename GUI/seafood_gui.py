@@ -62,6 +62,8 @@ class WindowClass(QMainWindow, from_class):
         self.camera.running = False
         self.camera.start()
 
+        self.connect_to_database()
+
 #==camera==
 
     def camera_update(self):   #maybe input YOLO here..?
@@ -101,7 +103,6 @@ class WindowClass(QMainWindow, from_class):
             self.btn_graph_onoff.setText("off")
             
             self.canvas.setVisible(True)
-            self.connect_to_database()
             self.graph_draw()
             
         else:   #self.btn_graph_status == True   #to stop
@@ -118,26 +119,21 @@ class WindowClass(QMainWindow, from_class):
                     SUM(quantity * average) AS total_amount,
                     SUM(quantity) AS total_quantity,
                     SUM(quantity * average) / SUM(quantity) AS monthly_average
-                FROM
-                    auction_price_data
+                FROM auction_price_data
                 WHERE
                     species LIKE "(활)암꽃게" AND
-                    date BETWEEN '2015-01-01' AND '2023-12-31'
-                GROUP BY
-                    species,
-                    month
-                ORDER BY
-                    month;
+                    date BETWEEN '2020-01-01' AND '2023-12-31'
+                GROUP BY species, month ORDER BY month;
                 """
-        self.columns, self.results = self.search_query(query)
-        self.df = pd.DataFrame(self.results)
-        self.df.columns = self.columns
+        columns, results = self.search_query(query)
+        df = pd.DataFrame(results)
+        df.columns = columns
 
-        x = self.df['month']
-        y = self.df['monthly_average']
+        x = df['month']
+        y = df['monthly_average']
 
         ax = self.fig.add_subplot(111)
-        ax.plot(x, y, label="sin")
+        ax.plot(x, y, label="price")
         ax.set_xlabel("x")
         ax.set_xlabel("y")
 
@@ -189,8 +185,6 @@ class WindowClass(QMainWindow, from_class):
             if self.btn_price_status == False:   #to run
                 self.btn_price_status = True
                 self.btn_price_onoff.setText("off")
-
-                self.connect_to_database()
                 #if connection.is_connected():
                     #self.text_price.setText("MySQL connection is connected")
                 query = """
@@ -209,7 +203,7 @@ class WindowClass(QMainWindow, from_class):
                 self.btn_price_onoff.setText("on")
                 if connection.is_connected():
                     connection.close()
-                self.display_table.clear()
+                self.display_table_data.clear()
 
     def display_table_data(self, table, columns, results):
         table.setRowCount(len(results))
@@ -223,32 +217,14 @@ class WindowClass(QMainWindow, from_class):
 #==test==
 
     def show_test_result(self):
-                self.connect_to_database()
-                #if connection.is_connected():
-                    #self.text_price.setText("MySQL connection is connected")
-                query = """
-                SELECT * FROM radioactive_test1;
-                """
-                self.query_result = pd.DataFrame(self.search_query(query))
-                columns, results = self.search_query(query)
-                if results:
-                    self.display_table_data(self.table_test_result, columns, results)
-                    #connection.close()
+        query = """
+        SELECT * FROM radioactive_test1;
+        """
+        columns, results = self.search_query(query)
+        if results:
+            self.display_table_data(self.table_test_result, columns, results)
 
 #==========================
-
-
-    #def connect_mysql(self):
-    #    self.remote = mysql.connector.connect(
-    #        host = '',
-    #        port = 3306,
-    #        user = "",
-    #        password = "",
-    #        database=''
-    #    )
-
-#    def connect_mysql(self) :
-#        self.remote = db_connect()
 
     def connect_to_database(self):
         global connection, cursor
@@ -272,7 +248,19 @@ class WindowClass(QMainWindow, from_class):
         columns = cursor.column_names
         results = cursor.fetchall()
         return columns, results
+    
+    def make_query(self, table='auction_price_data', status, species, origin, start_date='2024-01-01', end_date='2024-06') :
 
+        query_select = 'SELECT '
+        query_from = 'FROM ' + table
+        query_where = status + species + origin + start_date + end_date
+        if query_where != None :
+            query_where = 'WHERE ' + query_where
+        query_group = 'GROUP BY '
+        query_order = 'ORDER BY '
+        query_limit = 'LIMIT '
+        query = query_select + query_from + query_where + query_group + query_order + query_limit
+        return query
 class Camera(QThread):
     updateSignal = pyqtSignal()
 
