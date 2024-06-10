@@ -1,0 +1,4 @@
+train: ./deeplearning-repo-4/Datasets/gwangeo/YOLODataset/images/train/
+val: ./deeplearning-repo-4/Datasets/gwangeo/YOLODataset/images/val/
+nc: 1
+names: ["gwangeo"]

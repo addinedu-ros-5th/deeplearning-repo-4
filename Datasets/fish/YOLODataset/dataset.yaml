@@ -1,4 +1,0 @@
-train: /Users/yohan/Desktop/dev_ws/DeepLearning_Project/project2/data/fish/YOLODataset/images/train/
-val: /Users/yohan/Desktop/dev_ws/DeepLearning_Project/project2/data/fish/YOLODataset/images/val/
-nc: 6
-names: ["uleog", "galchi", "gajami", "domi", "agwi", "godeungeo"]

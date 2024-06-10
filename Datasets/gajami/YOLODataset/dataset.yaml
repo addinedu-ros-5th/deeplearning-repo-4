@@ -1,4 +1,0 @@
-train: /Users/yohan/Desktop/dev_ws/DeepLearning_Project/project2/data/gajami/YOLODataset/images/train/
-val: /Users/yohan/Desktop/dev_ws/DeepLearning_Project/project2/data/gajami/YOLODataset/images/val/
-nc: 1
-names: ["gajami"]
