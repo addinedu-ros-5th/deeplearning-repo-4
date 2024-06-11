@@ -34,7 +34,11 @@ label_mapping = {
 }
 
 
+<<<<<<< HEAD
 from_class = uic.loadUiType("GUI/seafood_gui.ui") [0]
+=======
+from_class = uic.loadUiType("./GUI/seafood_gui.ui") [0]
+>>>>>>> fa5d2b52fe7beab0fa63ef82d3c024fef678a980
 
 #class MySideBar(QMainWindow, Ui_MainWindow):
 class WindowClass(QMainWindow, from_class):
