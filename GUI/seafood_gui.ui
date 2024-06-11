@@ -142,7 +142,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_camera_clear">
+  <widget class="QPushButton" name="btn_clear_data">
    <property name="geometry">
     <rect>
      <x>551</x>
