@@ -197,7 +197,6 @@ class WindowClass(QMainWindow, from_class):
 
             self.table_info.append(searched_fish_info_str)
         else:
-            # self.table_info.append(f"{search_text}에 해당하는 정보를 찾을 수 없습니다.")
             QMessageBox.information(self, "check again", "'%s'에 대한 검색결과가 없습니다.\n다시 입력해주세요." %searched_text)
 
 
@@ -236,10 +235,12 @@ class WindowClass(QMainWindow, from_class):
                 table.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))
 
     def filtered_price_table(self):
-        region = self.cb_filter_region.currentText()
+        start_date =  self.edit_filter_start_date.text()
+        end_date = self.edit_filter_end_date.text()
+        origin = self.cb_filter_origins.currentText()
         species = self.cb_filter_species.currentText()
-        origin = self.cb_filter_origin.currentText()
-        status =  self.cb_filter_status.currentText()
+        packaging = self.cb_filter_packaging.currentText()
+        keywords =  self.cb_filter_keywords.currentText()
 
 #==test==
 

@@ -47,8 +47,8 @@
   <widget class="QPushButton" name="btn_price_onoff">
    <property name="geometry">
     <rect>
-     <x>1090</x>
-     <y>100</y>
+     <x>1070</x>
+     <y>160</y>
      <width>80</width>
      <height>25</height>
     </rect>
@@ -60,8 +60,8 @@
   <widget class="QLabel" name="label_price_info_title">
    <property name="geometry">
     <rect>
-     <x>650</x>
-     <y>120</y>
+     <x>660</x>
+     <y>150</y>
      <width>76</width>
      <height>23</height>
     </rect>
@@ -74,7 +74,7 @@
    <property name="geometry">
     <rect>
      <x>640</x>
-     <y>180</y>
+     <y>240</y>
      <width>520</width>
      <height>300</height>
     </rect>
@@ -92,11 +92,11 @@
     </size>
    </property>
   </widget>
-  <widget class="QComboBox" name="cb_filter_region">
+  <widget class="QComboBox" name="cb_filter_origin">
    <property name="geometry">
     <rect>
-     <x>750</x>
-     <y>140</y>
+     <x>650</x>
+     <y>200</y>
      <width>86</width>
      <height>25</height>
     </rect>
@@ -106,12 +106,17 @@
      <string>지역</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>무야호</string>
+    </property>
+   </item>
   </widget>
-  <widget class="QDateEdit" name="edit_filter_date">
+  <widget class="QDateEdit" name="edit_filter_start_date">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>140</y>
+     <x>650</x>
+     <y>170</y>
      <width>104</width>
      <height>26</height>
     </rect>
@@ -341,8 +346,8 @@ border: 2px solid #000000;
   <widget class="QComboBox" name="cb_filter_species">
    <property name="geometry">
     <rect>
-     <x>850</x>
-     <y>140</y>
+     <x>750</x>
+     <y>200</y>
      <width>86</width>
      <height>25</height>
     </rect>
@@ -353,26 +358,26 @@ border: 2px solid #000000;
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="cb_filter_origin">
+  <widget class="QComboBox" name="cb_filter_packaging">
    <property name="geometry">
     <rect>
-     <x>940</x>
-     <y>140</y>
+     <x>840</x>
+     <y>200</y>
      <width>86</width>
      <height>25</height>
     </rect>
    </property>
    <item>
     <property name="text">
-     <string>생산지</string>
+     <string>사이즈</string>
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="cb_filter_status">
+  <widget class="QComboBox" name="cb_filter_keywords">
    <property name="geometry">
     <rect>
-     <x>1030</x>
-     <y>140</y>
+     <x>940</x>
+     <y>200</y>
      <width>86</width>
      <height>25</height>
     </rect>
@@ -386,8 +391,8 @@ border: 2px solid #000000;
   <widget class="QPushButton" name="btn_table_price_search">
    <property name="geometry">
     <rect>
-     <x>1120</x>
-     <y>140</y>
+     <x>1040</x>
+     <y>200</y>
      <width>51</width>
      <height>25</height>
     </rect>
@@ -650,6 +655,46 @@ alternate-background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="edit_filter_end_date">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>170</y>
+     <width>104</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="minimumDateTime">
+    <datetime>
+     <hour>0</hour>
+     <minute>0</minute>
+     <second>0</second>
+     <year>2009</year>
+     <month>1</month>
+     <day>1</day>
+    </datetime>
+   </property>
+   <property name="maximumDate">
+    <date>
+     <year>2050</year>
+     <month>12</month>
+     <day>31</day>
+    </date>
+   </property>
+   <property name="minimumDate">
+    <date>
+     <year>2009</year>
+     <month>1</month>
+     <day>1</day>
+    </date>
+   </property>
+   <property name="displayFormat">
+    <string>yyyy-MM-dd</string>
+   </property>
+   <property name="calendarPopup">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
