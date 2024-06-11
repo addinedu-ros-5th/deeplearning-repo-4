@@ -43,7 +43,7 @@ class WindowClass(QMainWindow, from_class):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("________")
-        self.setFixedSize(1200, 900)   #fix size
+        self.setFixedSize(1200, 1000)   #fix size
 
         self.table_test_result.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
@@ -180,27 +180,31 @@ class WindowClass(QMainWindow, from_class):
 
     def search_bar(self):
 
-        searched_text = self.line_search.text()
+        searched_text = self.line_search.text()  
+        searched_text_list = [text.strip() for text in searched_text.split(',')]
+        
         self.table_info.clear()
         self.line_search.clear()
 
         with open("./GUI/fishlist.json", "r", encoding='utf-8') as file:
             fishlist = json.load(file)
 
-        searched_fish_name = None
+        for search_text in searched_text_list:
+            searched_fish_name = None
 
-        for fish_name in fishlist:
-            if fish_name["이름"] == searched_text or fish_name["초성"] == searched_text:
-                searched_fish_name = fish_name
-                break
+            for fish_name in fishlist:
 
-        if searched_fish_name:
-            searched_fish_name_filtered_initial = {key: value for key, value in searched_fish_name.items() if key != "초성"}
-            searched_fish_info_str = "\n".join([f"{key}: {value}" for key, value in searched_fish_name_filtered_initial.items()])
+                if fish_name["이름"] == search_text or fish_name["초성"] == search_text:
+                    searched_fish_name = fish_name
+                    break
 
-            self.table_info.append(searched_fish_info_str)
-        else:
-            QMessageBox.information(self, "check again", "'%s'에 대한 검색결과가 없습니다.\n다시 입력해주세요." %searched_text)
+            if searched_fish_name:
+                searched_fish_name_filtered_initial = {key: value for key, value in searched_fish_name.items() if key != "초성"}
+                searched_fish_info_str = "\n".join([f"{key}: {value}" for key, value in searched_fish_name_filtered_initial.items()])
+
+                self.table_info.append(searched_fish_info_str)
+            else:
+                QMessageBox.information(self, "check again", "'%s'에 대한 검색결과가 없습니다.\n다시 입력해주세요." %searched_text)
 
 
 #==price==

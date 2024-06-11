@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1200</width>
-    <height>900</height>
+    <height>1000</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,147 +16,11 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>590</y>
-     <width>521</width>
-     <height>301</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout_graph">
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="styleSheet">
-       <string notr="true">background-color:white</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="text">
-       <string>graph</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QPushButton" name="btn_price_onoff">
-   <property name="geometry">
-    <rect>
-     <x>1070</x>
-     <y>160</y>
-     <width>80</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>on</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_price_info_title">
-   <property name="geometry">
-    <rect>
-     <x>660</x>
-     <y>150</y>
-     <width>76</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;가격 정보&gt;</string>
-   </property>
-  </widget>
-  <widget class="QTableWidget" name="table_price">
-   <property name="geometry">
-    <rect>
-     <x>640</x>
-     <y>240</y>
-     <width>520</width>
-     <height>300</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>520</width>
-     <height>300</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>520</width>
-     <height>300</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="cb_filter_origin">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>200</y>
-     <width>86</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>지역</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>무야호</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QDateEdit" name="edit_filter_start_date">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>170</y>
-     <width>104</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="minimumDateTime">
-    <datetime>
-     <hour>0</hour>
-     <minute>0</minute>
-     <second>0</second>
-     <year>2009</year>
-     <month>1</month>
-     <day>1</day>
-    </datetime>
-   </property>
-   <property name="maximumDate">
-    <date>
-     <year>2050</year>
-     <month>12</month>
-     <day>31</day>
-    </date>
-   </property>
-   <property name="minimumDate">
-    <date>
-     <year>2009</year>
-     <month>1</month>
-     <day>1</day>
-    </date>
-   </property>
-   <property name="displayFormat">
-    <string>yyyy-MM-dd</string>
-   </property>
-   <property name="calendarPopup">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btn_camera_clear">
    <property name="geometry">
     <rect>
-     <x>551</x>
-     <y>421</y>
+     <x>550</x>
+     <y>500</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -184,8 +48,8 @@
   <widget class="QPushButton" name="btn_directory">
    <property name="geometry">
     <rect>
-     <x>551</x>
-     <y>241</y>
+     <x>550</x>
+     <y>320</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -213,8 +77,8 @@
   <widget class="QPushButton" name="btn_camera_caoture">
    <property name="geometry">
     <rect>
-     <x>551</x>
-     <y>361</y>
+     <x>550</x>
+     <y>440</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -242,8 +106,8 @@
   <widget class="QPushButton" name="btn_image_search">
    <property name="geometry">
     <rect>
-     <x>551</x>
-     <y>301</y>
+     <x>550</x>
+     <y>380</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -271,8 +135,8 @@
   <widget class="QLabel" name="label_today_price">
    <property name="geometry">
     <rect>
-     <x>660</x>
-     <y>90</y>
+     <x>630</x>
+     <y>60</y>
      <width>361</width>
      <height>20</height>
     </rect>
@@ -289,8 +153,8 @@
   <widget class="QFrame" name="searchframe">
    <property name="geometry">
     <rect>
-     <x>740</x>
-     <y>20</y>
+     <x>20</x>
+     <y>10</y>
      <width>431</width>
      <height>52</height>
     </rect>
@@ -343,73 +207,11 @@ border: 2px solid #000000;
     </item>
    </layout>
   </widget>
-  <widget class="QComboBox" name="cb_filter_species">
-   <property name="geometry">
-    <rect>
-     <x>750</x>
-     <y>200</y>
-     <width>86</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>품목</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QComboBox" name="cb_filter_packaging">
-   <property name="geometry">
-    <rect>
-     <x>840</x>
-     <y>200</y>
-     <width>86</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>사이즈</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QComboBox" name="cb_filter_keywords">
-   <property name="geometry">
-    <rect>
-     <x>940</x>
-     <y>200</y>
-     <width>86</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>종류</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QPushButton" name="btn_table_price_search">
-   <property name="geometry">
-    <rect>
-     <x>1040</x>
-     <y>200</y>
-     <width>51</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>resource/icon/icons8-search-50.png</normaloff>resource/icon/icons8-search-50.png</iconset>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btn_camera_onoff">
    <property name="geometry">
     <rect>
-     <x>550</x>
-     <y>180</y>
+     <x>549</x>
+     <y>259</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -430,52 +232,13 @@ border: 2px solid #000000;
     <string>on</string>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>550</y>
-     <width>515</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_3">
-    <item>
-     <widget class="QLabel" name="label_graph_title">
-      <property name="text">
-       <string>&lt;가격 변동 그래프&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>300</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btn_graph_onoff">
-      <property name="text">
-       <string>on</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>540</y>
+     <x>20</x>
+     <y>620</y>
      <width>561</width>
-     <height>171</height>
+     <height>191</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -486,9 +249,9 @@ background-color:#e9ecef;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>30</y>
+      <y>40</y>
       <width>520</width>
-      <height>122</height>
+      <height>101</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -502,6 +265,9 @@ background-color:#e9ecef;</string>
       <width>520</width>
       <height>16777215</height>
      </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">line-height: 300%;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_deatil_info_title">
@@ -529,7 +295,7 @@ background-color:#e9ecef;</string>
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>720</y>
+     <y>820</y>
      <width>561</width>
      <height>171</height>
     </rect>
@@ -557,8 +323,8 @@ background-color:#e9ecef;
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-alternate-background-color: rgb(255, 255, 255);</string>
+     <string notr="true">border-radius: 0px;
+background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_test_result_title">
@@ -585,21 +351,28 @@ alternate-background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_image_search_title">
    <property name="geometry">
     <rect>
-     <x>21</x>
-     <y>11</y>
+     <x>30</x>
+     <y>90</y>
      <width>131</width>
      <height>23</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
-    <string>&lt;이미지로 검색하기&gt;</string>
+    <string>이미지로 검색하기</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="line_detect">
    <property name="geometry">
     <rect>
-     <x>21</x>
-     <y>504</y>
+     <x>20</x>
+     <y>583</y>
      <width>520</width>
      <height>25</height>
     </rect>
@@ -623,8 +396,8 @@ alternate-background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_camera">
    <property name="geometry">
     <rect>
-     <x>21</x>
-     <y>49</y>
+     <x>20</x>
+     <y>128</y>
      <width>520</width>
      <height>440</height>
     </rect>
@@ -657,46 +430,456 @@ alternate-background-color: rgb(255, 255, 255);</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QDateEdit" name="edit_filter_end_date">
+  <widget class="QWidget" name="widget_3" native="true">
    <property name="geometry">
     <rect>
-     <x>780</x>
-     <y>170</y>
-     <width>104</width>
-     <height>26</height>
+     <x>610</x>
+     <y>110</y>
+     <width>561</width>
+     <height>481</height>
     </rect>
    </property>
-   <property name="minimumDateTime">
-    <datetime>
-     <hour>0</hour>
-     <minute>0</minute>
-     <second>0</second>
-     <year>2009</year>
-     <month>1</month>
-     <day>1</day>
-    </datetime>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 15px;
+background-color:#e9ecef;</string>
    </property>
-   <property name="maximumDate">
-    <date>
-     <year>2050</year>
-     <month>12</month>
-     <day>31</day>
-    </date>
-   </property>
-   <property name="minimumDate">
-    <date>
-     <year>2009</year>
-     <month>1</month>
-     <day>1</day>
-    </date>
-   </property>
-   <property name="displayFormat">
-    <string>yyyy-MM-dd</string>
-   </property>
-   <property name="calendarPopup">
-    <bool>true</bool>
-   </property>
+   <widget class="QTableWidget" name="table_price">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>520</width>
+      <height>330</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>520</width>
+      <height>330</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>520</width>
+      <height>330</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_price_info_title">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>10</y>
+      <width>76</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>가격 정보</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>80</y>
+      <width>511</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QComboBox" name="cb_filter_origins">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>지역</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cb_filter_species">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>품목</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cb_filter_packaging">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>사이즈</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cb_filter_keywords">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>종류</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_table_price_search">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>resource/icon/icons8-search-50.png</normaloff>resource/icon/icons8-search-50.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>40</y>
+      <width>511</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QDateEdit" name="edit_filter_start_date">
+       <property name="minimumSize">
+        <size>
+         <width>105</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>105</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="minimumDateTime">
+        <datetime>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+         <year>2009</year>
+         <month>1</month>
+         <day>1</day>
+        </datetime>
+       </property>
+       <property name="maximumDate">
+        <date>
+         <year>2050</year>
+         <month>12</month>
+         <day>31</day>
+        </date>
+       </property>
+       <property name="minimumDate">
+        <date>
+         <year>2009</year>
+         <month>1</month>
+         <day>1</day>
+        </date>
+       </property>
+       <property name="displayFormat">
+        <string>yyyy-MM-dd</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateEdit" name="edit_filter_end_date">
+       <property name="minimumSize">
+        <size>
+         <width>105</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>105</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="minimumDateTime">
+        <datetime>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+         <year>2009</year>
+         <month>1</month>
+         <day>1</day>
+        </datetime>
+       </property>
+       <property name="maximumDate">
+        <date>
+         <year>2050</year>
+         <month>12</month>
+         <day>31</day>
+        </date>
+       </property>
+       <property name="minimumDate">
+        <date>
+         <year>2009</year>
+         <month>1</month>
+         <day>1</day>
+        </date>
+       </property>
+       <property name="displayFormat">
+        <string>yyyy-MM-dd</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_price_onoff">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>on</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
+  <widget class="QWidget" name="widget_4" native="true">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>600</y>
+     <width>571</width>
+     <height>391</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 15px;
+background-color:#e9ecef;</string>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>50</y>
+      <width>521</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_graph">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">background-color:white</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string>graph</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label_graph_title">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>11</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>가격 변동 그래프</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_graph_onoff">
+    <property name="geometry">
+     <rect>
+      <x>477</x>
+      <y>20</y>
+      <width>60</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>60</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>on</string>
+    </property>
+   </widget>
+  </widget>
+  <zorder>widget_3</zorder>
+  <zorder>widget</zorder>
+  <zorder>btn_camera_clear</zorder>
+  <zorder>btn_directory</zorder>
+  <zorder>btn_camera_caoture</zorder>
+  <zorder>btn_image_search</zorder>
+  <zorder>label_today_price</zorder>
+  <zorder>searchframe</zorder>
+  <zorder>btn_camera_onoff</zorder>
+  <zorder>widget_2</zorder>
+  <zorder>label_image_search_title</zorder>
+  <zorder>line_detect</zorder>
+  <zorder>label_camera</zorder>
+  <zorder>widget_4</zorder>
  </widget>
  <resources>
   <include location="resources.qrc"/>
