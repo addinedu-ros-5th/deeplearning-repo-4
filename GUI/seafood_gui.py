@@ -247,13 +247,11 @@ class WindowClass(QMainWindow, from_class):
                 SELECT
                     species,
                     DATE_FORMAT(date, '%Y-%m') AS month,
-                    SUM(quantity * average) AS total_amount,
-                    SUM(quantity) AS total_quantity,
                     SUM(quantity * average) / SUM(quantity) AS monthly_average
                 FROM auction_price_data
                 WHERE
                     species LIKE "(활)암꽃게" AND
-                    date BETWEEN '2009-01-01' AND '2023-12-31'
+                    date BETWEEN '2019-01-01' AND '2023-12-31'
                 GROUP BY species, month ORDER BY month;
                 """
         columns, results = self.search_query(query)
@@ -345,36 +343,44 @@ class WindowClass(QMainWindow, from_class):
         if connection and connection.is_connected():
             cursor = connection.cursor()
 
-            cursor.execute("SELECT DISTINCT species FROM auction_price_data")
+            cursor.execute("SELECT DISTINCT TRIM(LEADING '(' FROM SUBSTRING_INDEX(species, ')', -1)) AS species FROM auction_price_data WHERE date > 2020-01-01 ORDER BY species DESC")
             species = cursor.fetchall()
             self.cb_filter_species.addItem("전체")
             for item in species:
                 self.cb_filter_species.addItem(item[0])
 
-            cursor.execute("SELECT DISTINCT origin FROM auction_price_data")
+            cursor.execute("SELECT DISTINCT origin FROM auction_price_data WHERE date > 2020-01-01 ORDER BY origin DESC")
             origins = cursor.fetchall()
             self.cb_filter_origins.addItem("전체")
             for item in origins:
                 self.cb_filter_origins.addItem(item[0])
 
+            self.cb_filter_keywords.addItem("전체")
+            keywords = ['활어','냉동','선어','건조', '가공']
+            for item in keywords:
+                self.cb_filter_keywords.addItem(item)
+
+
     def filtered_price_table(self):
         start_date =  self.edit_filter_start_date.text()
         end_date = self.edit_filter_end_date.text()
-        origins = self.cb_filter_origins.currentText()
-        species = self.cb_filter_species.currentText()
-        packaging = self.cb_filter_packaging.currentText()
-        keywords =  self.cb_filter_keywords.currentText()
+        origins = [self.cb_filter_origins.currentText()]
+        species = [self.cb_filter_species.currentText()]
+        packaging = [self.cb_filter_packaging.currentText()]
+        keywords =  [self.cb_filter_keywords.currentText()]
 
+        keywords =  list(self.cb_filter_keywords.currentText())
+        print(keywords[0])
 
         table = "auction_price_data"
-        species = ["넙치", "암꽃게"]
+        #species = ["넙치", "암꽃게"]
         size = "대"
-        start_date = "2020-01-01"
-        end_date = "2023-12-31"
-        origins = ["태안"]
-        keywords = ["활"]
+        # start_date = "2020-01-01"
+        # end_date = "2023-12-31"
+        # origins = ["태안"]
 
         query = self.generate_query(table, species, size, start_date, end_date, origins, keywords)
+        print(query)
         columns, results = self.search_query(query)
         if results :
             self.display_table_data(self.table_price, columns, results)
@@ -384,7 +390,7 @@ class WindowClass(QMainWindow, from_class):
 
     def show_test_result(self):
         query = """
-        SELECT * FROM radioactive_test1;
+        SELECT * FROM radioactivity_pollution;
         """
         columns, results = self.search_query(query)
         if results:
@@ -443,13 +449,13 @@ class WindowClass(QMainWindow, from_class):
         base_query = f"SELECT * FROM {table} WHERE"
         conditions = []
 
-        if keywords: # 활, 냉, 선
-            keywords_condition = " OR ".join([f"species LIKE '({keyword})%'" for keyword in keywords])
+        if keywords != '전': # 활, 냉, 선
+            keywords_condition = (f"species LIKE '({keywords[0]})%'")
             conditions.append(f"({keywords_condition})")
 
-        if species: # 넙치, 암꽃게, 오징어
-            color_condition = " OR ".join([f"species LIKE '%{specie}%'" for specie in species])
-            conditions.append(f"({color_condition})")
+        if species != ['전체']: # 넙치, 암꽃게, 오징어
+            species_condition = " OR ".join([f"species LIKE '%{specie}%'" for specie in species])
+            conditions.append(f"({species_condition})")
 
         if size:    # 대, 중, 소, kg, box
             conditions.append(f"size = '{size}'")
@@ -459,7 +465,7 @@ class WindowClass(QMainWindow, from_class):
                 raise ValueError("Start date cannot be after end date")
             conditions.append(f"date BETWEEN '{start_date}' AND '{end_date}'")
 
-        if origins: #태안, 목포, 제주
+        if origins != ['전체']: #태안, 목포, 제주
             origin_condition = " OR ".join([f"origin = '{origin}'" for origin in origins])
             conditions.append(f"({origin_condition})")
 
