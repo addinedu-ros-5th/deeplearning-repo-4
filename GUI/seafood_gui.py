@@ -353,16 +353,29 @@ class WindowClass(QMainWindow, from_class):
             for item in species:
                 self.cb_filter_species.addItem(item[0])
 
-            cursor.execute("SELECT DISTINCT origin FROM auction_price_data WHERE date > 2020-01-01 ORDER BY origin DESC")
-            origins = cursor.fetchall()
-            self.cb_filter_origins.addItem("전체")
-            for item in origins:
-                self.cb_filter_origins.addItem(item[0])
+            #cursor.execute("SELECT DISTINCT origin FROM auction_price_data WHERE date > 2020-01-01 ORDER BY origin DESC")
+            #origins = cursor.fetchall()
+            #self.cb_filter_origins.addItem("전체")
+            #print(origins)
+            #for item in origins:
+            #    self.cb_filter_origins.addItem(item[0])
 
-            self.cb_filter_keywords.addItem("전체")
-            keywords = ['활어','냉동','선어','건조', '가공']
+            origins = ['전체','감포','강구','강화','거문도','거제도','거진','격포','경남','고성','고창','고흥','곰소','구룡포','국산(근해)','군산','기타','기타(국내)','기타(수입)','기타(원양)',
+                       '기타국가','남해','당진','대만','대부도','대서양','대진','대천','대포','동해시','마산','목포','문산','미국','방어진','백령도','벌교','보령','부산','부안','북대서양',
+                       '북서부태평양','사천','삼척','삼천포','서산','서천','소래','속초','순천','신안','안면도','안흥','양양','여수','연평도','영광','영국','영덕','영흥도','완도','울릉도',
+                       '울산','울진','인천','일본','임원','장항','장흥','제주도','주문진','죽변','중국','진도','추자도','축산','충무','태안','태평양','통영','포항','한국','해남','호주',
+                       '화성','후포','흑산도']
+            for item in origins:
+                self.cb_filter_origins.addItem(item)
+
+            keywords = ['전체', '활어','냉동','선어','건조', '가공']
             for item in keywords:
                 self.cb_filter_keywords.addItem(item)
+
+
+            size = ['전체', '대', '중', '소']
+            for item in size:
+                self.cb_filter_packaging.addItem(item)
 
 
     def filtered_price_table(self):
