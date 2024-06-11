@@ -74,7 +74,7 @@
      <normaloff>resource/icon/icons8-directory-64.png</normaloff>resource/icon/icons8-directory-64.png</iconset>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_camera_caoture">
+  <widget class="QPushButton" name="btn_camera_capture">
    <property name="geometry">
     <rect>
      <x>550</x>
@@ -849,7 +849,7 @@ border-radius: 0px;</string>
   <zorder>btn_clear_data</zorder>
   <zorder>widget</zorder>
   <zorder>btn_directory</zorder>
-  <zorder>btn_camera_caoture</zorder>
+  <zorder>btn_camera_capture</zorder>
   <zorder>btn_image_search</zorder>
   <zorder>label_today_price</zorder>
   <zorder>searchframe</zorder>

@@ -181,11 +181,9 @@ class WindowClass(QMainWindow, from_class):
                 label = int(box.cls.item())
                 if label in label_mapping:
                     label_name = label_mapping[label]
-                    
-                    if label_name not in self.having_label:                    
-                        
+                    if label_name not in self.having_label:
                         self.having_label.append(label_name)
-                            
+
         self.line_detect.setText(', '.join(self.having_label))
         print(self.having_label)
 
