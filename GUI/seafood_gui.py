@@ -24,6 +24,7 @@ from db_connect import DB_CONFIG
 from ultralytics import YOLO
 from collections import defaultdict
 import os
+
 label_mapping = {
     0: "우럭",
     1: "갈치",
@@ -78,6 +79,8 @@ class WindowClass(QMainWindow, from_class):
         self.camera.start()
 
         self.connect_to_database()
+        self.show_price()
+        self.graph_draw()
 
         self.model = YOLO("Fish_model/yolov8n.pt")
 
@@ -222,8 +225,6 @@ class WindowClass(QMainWindow, from_class):
             else:   #to stop
                 self.btn_price_status = False
                 self.btn_price_onoff.setText("on")
-                if connection.is_connected():
-                    connection.close()
                 self.table_price.clear()
 
     def display_table_data(self, table, columns, results):
@@ -289,7 +290,7 @@ class WindowClass(QMainWindow, from_class):
             origin_condition = " OR ".join([f"origin = '{origin}'" for origin in origins])
             conditions.append(f"({origin_condition})")
 
-        query = f"{base_query} {' AND '.join(conditions)} ORDER BY date DESC LIMIT 100"
+        query = f"{base_query} {' AND '.join(conditions)} ORDER BY date DESC LIMIT 50"
         return query
     ####
 
@@ -315,8 +316,8 @@ class WindowClass(QMainWindow, from_class):
         columns = cursor.column_names
         results = cursor.fetchall()
         return columns, results
-    
-    
+
+
 class Camera(QThread):
     updateSignal = pyqtSignal()
 
