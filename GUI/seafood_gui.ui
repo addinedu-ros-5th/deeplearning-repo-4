@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
@@ -104,11 +104,6 @@
    <item>
     <property name="text">
      <string>지역</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>야호</string>
     </property>
    </item>
   </widget>
@@ -289,9 +284,9 @@
   <widget class="QFrame" name="searchframe">
    <property name="geometry">
     <rect>
-     <x>650</x>
+     <x>740</x>
      <y>20</y>
-     <width>401</width>
+     <width>431</width>
      <height>52</height>
     </rect>
    </property>
@@ -398,7 +393,11 @@ border: 2px solid #000000;
     </rect>
    </property>
    <property name="text">
-    <string>search</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>resource/icon/icons8-search-50.png</normaloff>resource/icon/icons8-search-50.png</iconset>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_camera_onoff">
@@ -425,118 +424,6 @@ border: 2px solid #000000;
    <property name="text">
     <string>on</string>
    </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>531</width>
-     <height>871</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>15</number>
-    </property>
-    <item>
-     <widget class="QLabel" name="label_image_search_title">
-      <property name="text">
-       <string>&lt;이미지로 검색하기&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_camera">
-      <property name="minimumSize">
-       <size>
-        <width>520</width>
-        <height>440</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>520</width>
-        <height>440</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color:white</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>resource/icon/icons8-camera-50 (1).png</pixmap>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="line_detect">
-      <property name="minimumSize">
-       <size>
-        <width>520</width>
-        <height>25</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>520</width>
-        <height>25</height>
-       </size>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_deatil_info_title">
-      <property name="text">
-       <string>&lt;상세 정보&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QTextBrowser" name="table_info">
-      <property name="minimumSize">
-       <size>
-        <width>520</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>520</width>
-        <height>16777215</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_test_result_title">
-      <property name="text">
-       <string>&lt;수산물 방사능 검사 결과&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QTableWidget" name="table_test_result">
-      <property name="maximumSize">
-       <size>
-        <width>520</width>
-        <height>16777215</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-   </layout>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -576,6 +463,194 @@ border: 2px solid #000000;
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>540</y>
+     <width>561</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 15px;
+background-color:#e9ecef;</string>
+   </property>
+   <widget class="QTextBrowser" name="table_info">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>520</width>
+      <height>122</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>520</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>520</width>
+      <height>16777215</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_deatil_info_title">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>76</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>상세 정보</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="widget_2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>720</y>
+     <width>561</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget
+{
+border-radius: 15px;
+background-color:#e9ecef;
+}</string>
+   </property>
+   <widget class="QTableWidget" name="table_test_result">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>520</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>520</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+alternate-background-color: rgb(255, 255, 255);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_test_result_title">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>166</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>수산물 방사능 검사 결과</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label_image_search_title">
+   <property name="geometry">
+    <rect>
+     <x>21</x>
+     <y>11</y>
+     <width>131</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;이미지로 검색하기&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="line_detect">
+   <property name="geometry">
+    <rect>
+     <x>21</x>
+     <y>504</y>
+     <width>520</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>520</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>520</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_camera">
+   <property name="geometry">
+    <rect>
+     <x>21</x>
+     <y>49</y>
+     <width>520</width>
+     <height>440</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>520</width>
+     <height>440</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>520</width>
+     <height>440</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:white</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>resource/icon/icons8-camera-50 (1).png</pixmap>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
  </widget>
  <resources>

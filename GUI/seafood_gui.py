@@ -20,7 +20,25 @@ import mysql.connector
 from mysql.connector import Error
 from db_connect import DB_CONFIG
 
+<<<<<<< HEAD
 from_class = uic.loadUiType("./GUI/seafood_gui.ui") [0]
+=======
+
+from ultralytics import YOLO
+from collections import defaultdict
+import os
+label_mapping = {
+    0: "우럭",
+    1: "갈치",
+    2: "가자미",
+    3: "도미",
+    4: "아귀",
+    5: "고등어"
+}
+
+
+from_class = uic.loadUiType("GUI/seafood_gui.ui") [0]
+>>>>>>> 3eb8a203341e12ca27fcb9d15222ceaac627556c
 
 #class MySideBar(QMainWindow, Ui_MainWindow):
 class WindowClass(QMainWindow, from_class):
@@ -65,6 +83,16 @@ class WindowClass(QMainWindow, from_class):
 
         self.connect_to_database()
 
+<<<<<<< HEAD
+=======
+        self.model = YOLO("Fish_model/yolov8n.pt")
+
+        self.f = open("./segment_log.txt", "w+")
+        self.track_history = defaultdict(lambda: [])
+        self.having_label = []
+        self.pixmap_camera = None
+
+>>>>>>> 3eb8a203341e12ca27fcb9d15222ceaac627556c
 #==camera==
 
     def camera_update(self):   #maybe input YOLO here..?
@@ -160,7 +188,11 @@ class WindowClass(QMainWindow, from_class):
         self.table_info.clear()
         self.line_search.clear()
 
+<<<<<<< HEAD
         with open("./GUI/fishlist.json", "r", encoding='utf-8') as file:
+=======
+        with open("GUI/fishlist.json", "r", encoding='utf-8') as file:
+>>>>>>> 3eb8a203341e12ca27fcb9d15222ceaac627556c
             fishlist = json.load(file)
 
         searched_fish_name = None
