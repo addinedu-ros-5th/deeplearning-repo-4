@@ -46,9 +46,10 @@ class WindowClass(QMainWindow, from_class):
 
         self.table_test_result.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
+        new_year = QDate(2024, 1, 1)
         today = QDate.currentDate()
         self.edit_filter_end_date.setDate(today)
-        self.edit_filter_start_date.setDate(today)
+        self.edit_filter_start_date.setDate(new_year)
 
         self.pixmap = QPixmap()
         self.camera = Camera()
@@ -66,8 +67,6 @@ class WindowClass(QMainWindow, from_class):
         self.btn_camera_onoff.setText("on")
         self.btn_graph_onoff.setText("on")
         self.btn_price_onoff.setText("on")
-
-        #self.test_text_list = ["광어", "오징어", "전복"]
 
         self.btn_camera_onoff.clicked.connect(self.camera_onoff)
         self.btn_graph_onoff.clicked.connect(self.graph_onoff)
@@ -87,8 +86,8 @@ class WindowClass(QMainWindow, from_class):
 
         self.connect_to_database()
         self.load_combobox_data()
-        #self.show_price()
-        #self.graph_draw()
+        self.show_price()
+        self.graph_draw()
 
         self.model = YOLO("Fish_model/segment/train4/weights/best.pt")
 
@@ -107,18 +106,14 @@ class WindowClass(QMainWindow, from_class):
             if results_tracking is not None and len(results_tracking) > 0 and results_tracking[0] is not None and results_tracking[0].boxes is not None:
                 boxes = results_tracking[0].boxes.xywh.cpu()
                 track_ids = []
-                
                 for box in results_tracking[0].boxes:
                     if box.id is not None:
                         track_ids.append(box.id)
                         label = int(box.cls.item())
                         if label in label_mapping:
                             label_name = label_mapping[label]
-                            
-                            if label_name not in self.having_label:                    
-                                
+                            if label_name not in self.having_label:
                                 self.having_label.append(label_name)
-                            
                 self.line_detect.setText(', '.join(self.having_label))
                 self.line_search.setText(', '.join(self.having_label))
                 print(self.having_label)
@@ -282,21 +277,11 @@ class WindowClass(QMainWindow, from_class):
 
 #==search==
 
-    # def search_bar(self):
-    #     search_text = self.line_search.text()
-    #     if search_text not in self.test_text_list:
-    #         QMessageBox.information(self, "check again", "입력된 텍스트의 정보가 없습니다.\n다시 입력해주세요.")
-
-    #         return
-    #     elif search_text in self.test_text_list:   #입력한 텍스트가 물고기 종류 배열?에 속할 때
-    #         print("test ok")
-    #         self.line_search.clear()
-
     def search_bar(self):
 
-        searched_text = self.line_search.text()  
+        searched_text = self.line_search.text()
         searched_text_list = [text.strip() for text in searched_text.split(',')]
-        
+
         self.table_info.clear()
         self.line_search.clear()
 
@@ -312,6 +297,7 @@ class WindowClass(QMainWindow, from_class):
                     searched_fish_name = fish_name
                     break
 
+            self.cb_filter_species.setCurrentText(search_text)
             if searched_fish_name:
                 searched_fish_name_filtered_initial = {key: value for key, value in searched_fish_name.items() if key != "초성"}
                 searched_fish_info_str = "\n".join([f"{key}: {value}" for key, value in searched_fish_name_filtered_initial.items()])
@@ -330,7 +316,7 @@ class WindowClass(QMainWindow, from_class):
             if not connection.is_connected():
                 self.connect_to_database()
             query = """
-            SELECT * FROM auction_price_data ORDER BY date DESC LIMIT 10;
+            SELECT * FROM auction_price_data ORDER BY date DESC LIMIT 20;
             """
             columns, results = self.search_query(query)
             if results:
@@ -363,13 +349,6 @@ class WindowClass(QMainWindow, from_class):
             for item in species:
                 self.cb_filter_species.addItem(item[0])
 
-            #cursor.execute("SELECT DISTINCT origin FROM auction_price_data WHERE date > 2020-01-01 ORDER BY origin DESC")
-            #origins = cursor.fetchall()
-            #self.cb_filter_origins.addItem("전체")
-            #print(origins)
-            #for item in origins:
-            #    self.cb_filter_origins.addItem(item[0])
-
             origins = ['전체','감포','강구','강화','거문도','거제도','거진','격포','경남','고성','고창','고흥','곰소','구룡포','국산(근해)','군산','기타','기타(국내)','기타(수입)','기타(원양)',
                        '기타국가','남해','당진','대만','대부도','대서양','대진','대천','대포','동해시','마산','목포','문산','미국','방어진','백령도','벌교','보령','부산','부안','북대서양',
                        '북서부태평양','사천','삼척','삼천포','서산','서천','소래','속초','순천','신안','안면도','안흥','양양','여수','연평도','영광','영국','영덕','영흥도','완도','울릉도',
@@ -378,14 +357,14 @@ class WindowClass(QMainWindow, from_class):
             for item in origins:
                 self.cb_filter_origins.addItem(item)
 
-            keywords = ['전체', '활어','냉동','선어','건조', '가공']
+            keywords = ['전체','활어','냉동','선어','건조','가공']
             for item in keywords:
                 self.cb_filter_keywords.addItem(item)
 
 
             size = ['전체', '대', '중', '소']
             for item in size:
-                self.cb_filter_packaging.addItem(item)
+                self.cb_filter_size.addItem(item)
 
 
     def filtered_price_table(self):
@@ -393,18 +372,12 @@ class WindowClass(QMainWindow, from_class):
         end_date = self.edit_filter_end_date.text()
         origins = [self.cb_filter_origins.currentText()]
         species = [self.cb_filter_species.currentText()]
-        packaging = [self.cb_filter_packaging.currentText()]
+        size = [self.cb_filter_size.currentText()]
         keywords =  [self.cb_filter_keywords.currentText()]
 
         keywords =  list(self.cb_filter_keywords.currentText())
-        print(keywords[0])
 
         table = "auction_price_data"
-        #species = ["넙치", "암꽃게"]
-        size = "대"
-        # start_date = "2020-01-01"
-        # end_date = "2023-12-31"
-        # origins = ["태안"]
 
         query = self.generate_query(table, species, size, start_date, end_date, origins, keywords)
         print(query)
@@ -417,7 +390,7 @@ class WindowClass(QMainWindow, from_class):
 
     def show_test_result(self):
         query = """
-        SELECT * FROM radioactive_test1;
+        SELECT * FROM radioactivity_pollution;
         """
         columns, results = self.search_query(query)
         if results:
@@ -476,7 +449,7 @@ class WindowClass(QMainWindow, from_class):
         base_query = f"SELECT * FROM {table} WHERE"
         conditions = []
 
-        if keywords != '전': # 활, 냉, 선
+        if keywords != ['전']: # 활, 냉, 선
             keywords_condition = (f"species LIKE '({keywords[0]})%'")
             conditions.append(f"({keywords_condition})")
 
@@ -484,7 +457,7 @@ class WindowClass(QMainWindow, from_class):
             species_condition = " OR ".join([f"species LIKE '%{specie}%'" for specie in species])
             conditions.append(f"({species_condition})")
 
-        if size:    # 대, 중, 소, kg, box
+        if size != ['전체']:    # 대, 중, 소, kg, box
             conditions.append(f"size = '{size}'")
 
         if start_date and end_date: # 2024-06-09

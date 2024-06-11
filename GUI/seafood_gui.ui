@@ -41,7 +41,7 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/resource/icon/icons8-clear-60.png</normaloff>:/icons/resource/icon/icons8-clear-60.png</iconset>
    </property>
   </widget>
@@ -70,7 +70,7 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/resource/icon/icons8-directory-64.png</normaloff>:/icons/resource/icon/icons8-directory-64.png</iconset>
    </property>
   </widget>
@@ -99,7 +99,7 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/resource/icon/icons8-camera-50.png</normaloff>:/icons/resource/icon/icons8-camera-50.png</iconset>
    </property>
   </widget>
@@ -128,7 +128,7 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/resource/icon/icons8-search-50.png</normaloff>:/icons/resource/icon/icons8-search-50.png</iconset>
    </property>
   </widget>
@@ -264,7 +264,7 @@ background-color:#e9ecef;</string>
      <string notr="true">line-height: 300%;</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -292,7 +292,7 @@ background-color:#e9ecef;</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-information-50.png</pixmap>
+        <pixmap>:/icons/resource/icon/icons8-information-50.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -370,7 +370,7 @@ background-color:#e9ecef;
 background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -398,7 +398,7 @@ background-color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-radioactive-50.png</pixmap>
+        <pixmap>:/icons/resource/icon/icons8-radioactive-50.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -511,7 +511,7 @@ background-color:#e9ecef;</string>
      <string>on</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -539,7 +539,7 @@ background-color:#e9ecef;</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-graph-48.png</pixmap>
+        <pixmap>:/icons/resource/icon/icons8-graph-48.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -650,7 +650,7 @@ background-color:#e9ecef;</string>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cb_filter_packaging">
+      <widget class="QComboBox" name="cb_filter_size">
        <property name="minimumSize">
         <size>
          <width>90</width>
@@ -722,7 +722,7 @@ border-radius: 0px;</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="resources.qrc">
+        <iconset>
          <normaloff>:/icons/resource/icon/icons8-search-50.png</normaloff>:/icons/resource/icon/icons8-search-50.png</iconset>
        </property>
       </widget>
@@ -868,7 +868,7 @@ border-radius: 0px;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -896,7 +896,7 @@ border-radius: 0px;</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-price-50.png</pixmap>
+        <pixmap>:/icons/resource/icon/icons8-price-50.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -920,7 +920,7 @@ border-radius: 0px;</string>
     </layout>
    </widget>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -957,7 +957,7 @@ border-radius: 0px;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-camera-50 (1).png</pixmap>
+       <pixmap>:/icons/resource/icon/icons8-camera-50 (1).png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -988,6 +988,7 @@ border-radius: 0px;</string>
     </item>
    </layout>
   </widget>
+  <zorder>layoutWidget</zorder>
   <zorder>btn_clear_data</zorder>
   <zorder>widget</zorder>
   <zorder>btn_directory</zorder>
@@ -997,8 +998,6 @@ border-radius: 0px;</string>
   <zorder>btn_camera_onoff</zorder>
   <zorder>widget_2</zorder>
   <zorder>label_image_search_title</zorder>
-  <zorder>line_detect</zorder>
-  <zorder>label_camera</zorder>
   <zorder>widget_4</zorder>
   <zorder>widget_3</zorder>
  </widget>
