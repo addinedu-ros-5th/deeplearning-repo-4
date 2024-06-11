@@ -238,10 +238,25 @@ class WindowClass(QMainWindow, from_class):
     def filtered_price_table(self):
         start_date =  self.edit_filter_start_date.text()
         end_date = self.edit_filter_end_date.text()
-        origin = self.cb_filter_origins.currentText()
+        origins = self.cb_filter_origins.currentText()
         species = self.cb_filter_species.currentText()
         packaging = self.cb_filter_packaging.currentText()
         keywords =  self.cb_filter_keywords.currentText()
+
+
+        table = "auction_price_data"
+        species = ["넙치", "암꽃게"]
+        size = "대"
+        start_date = "2020-01-01"
+        end_date = "2023-12-31"
+        origins = ["태안"]
+        keywords = ["활"]
+
+        query = self.generate_query(table, species, size, start_date, end_date, origins, keywords)
+        columns, results = self.search_query(query)
+        if results :
+            self.display_table_data(self.table_price, columns, results)
+
 
 #==test==
 
@@ -267,7 +282,7 @@ class WindowClass(QMainWindow, from_class):
     #   sql_query = generate_query(table, species, size, start_date, end_date, origins, keywords)
     #   print(sql_query)
 
-    def generate_query(table, species=None, size=None, start_date=None, end_date=None, origins=None, keywords=None):
+    def generate_query(self, table, species=None, size=None, start_date=None, end_date=None, origins=None, keywords=None):
         base_query = f"SELECT * FROM {table} WHERE"
         conditions = []
 

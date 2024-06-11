@@ -92,7 +92,7 @@
     </size>
    </property>
   </widget>
-  <widget class="QComboBox" name="cb_filter_origin">
+  <widget class="QComboBox" name="cb_filter_origins">
    <property name="geometry">
     <rect>
      <x>650</x>
