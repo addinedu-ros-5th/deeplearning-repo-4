@@ -1,8 +1,6 @@
 from PIL import Image
 import pytesseract
 
-# Tesseract OCR 실행 파일의 경로 지정
-
 # Define the path to your image
 path = '/home/hj/Downloads/radi.jpg'
 
