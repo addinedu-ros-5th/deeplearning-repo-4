@@ -72,7 +72,7 @@ class WindowClass(QMainWindow, from_class):
         self.btn_price_onoff.clicked.connect(self.show_price)
         self.btn_table_price_search.clicked.connect(self.filtered_price_table)
         self.btn_directory.clicked.connect(self.load_image)
-        self.btn_camera_caoture.clicked.connect(self.capture)
+        self.btn_camera_capture.clicked.connect(self.capture)
         self.btn_clear_data.clicked.connect(self.clear_data)
 
         self.camera.updateSignal.connect(self.camera_update)
