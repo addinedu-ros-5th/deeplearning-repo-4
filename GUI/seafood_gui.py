@@ -247,11 +247,13 @@ class WindowClass(QMainWindow, from_class):
                 SELECT
                     species,
                     DATE_FORMAT(date, '%Y-%m') AS month,
+                    SUM(quantity * average) AS total_amount,
+                    SUM(quantity) AS total_quantity,
                     SUM(quantity * average) / SUM(quantity) AS monthly_average
                 FROM auction_price_data
                 WHERE
                     species LIKE "(활)암꽃게" AND
-                    date BETWEEN '2019-01-01' AND '2023-12-31'
+                    date BETWEEN '2009-01-01' AND '2023-12-31'
                 GROUP BY species, month ORDER BY month;
                 """
         columns, results = self.search_query(query)
@@ -394,7 +396,7 @@ class WindowClass(QMainWindow, from_class):
 
     def show_test_result(self):
         query = """
-        SELECT * FROM radioactivity_pollution;
+        SELECT * FROM radioactive_test1;
         """
         columns, results = self.search_query(query)
         if results:
