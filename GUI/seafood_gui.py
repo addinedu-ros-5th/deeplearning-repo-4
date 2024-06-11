@@ -79,8 +79,9 @@ class WindowClass(QMainWindow, from_class):
         self.camera.start()
 
         self.connect_to_database()
-        self.show_price()
-        self.graph_draw()
+        self.load_combobox_data()
+        #self.show_price()
+        #self.graph_draw()
 
         self.model = YOLO("Fish_model/yolov8n.pt")
 
@@ -234,6 +235,22 @@ class WindowClass(QMainWindow, from_class):
         for row_idx, row_data in enumerate(results):
             for col_idx, col_data in enumerate(row_data):
                 table.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))
+
+    def load_combobox_data(self):
+        if connection and connection.is_connected():
+            cursor = connection.cursor()
+
+            cursor.execute("SELECT DISTINCT species FROM auction_price_data")
+            species = cursor.fetchall()
+            self.cb_filter_species.addItem("전체")
+            for item in species:
+                self.cb_filter_species.addItem(item[0])
+
+            cursor.execute("SELECT DISTINCT origin FROM auction_price_data")
+            origins = cursor.fetchall()
+            self.cb_filter_origins.addItem("전체")
+            for item in origins:
+                self.cb_filter_origins.addItem(item[0])
 
     def filtered_price_table(self):
         start_date =  self.edit_filter_start_date.text()

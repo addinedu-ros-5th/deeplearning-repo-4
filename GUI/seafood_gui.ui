@@ -101,16 +101,6 @@
      <height>25</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>지역</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>무야호</string>
-    </property>
-   </item>
   </widget>
   <widget class="QDateEdit" name="edit_filter_start_date">
    <property name="geometry">
@@ -352,11 +342,6 @@ border: 2px solid #000000;
      <height>25</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>품목</string>
-    </property>
-   </item>
   </widget>
   <widget class="QComboBox" name="cb_filter_packaging">
    <property name="geometry">
@@ -367,11 +352,6 @@ border: 2px solid #000000;
      <height>25</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>사이즈</string>
-    </property>
-   </item>
   </widget>
   <widget class="QComboBox" name="cb_filter_keywords">
    <property name="geometry">
@@ -382,11 +362,6 @@ border: 2px solid #000000;
      <height>25</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>종류</string>
-    </property>
-   </item>
   </widget>
   <widget class="QPushButton" name="btn_table_price_search">
    <property name="geometry">
