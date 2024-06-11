@@ -20,7 +20,7 @@
    <property name="geometry">
     <rect>
      <x>550</x>
-     <y>500</y>
+     <y>480</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -41,15 +41,15 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>resource/icon/icons8-clear-60.png</normaloff>resource/icon/icons8-clear-60.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/resource/icon/icons8-clear-60.png</normaloff>:/icons/resource/icon/icons8-clear-60.png</iconset>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_directory">
    <property name="geometry">
     <rect>
      <x>550</x>
-     <y>320</y>
+     <y>300</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -70,15 +70,15 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>resource/icon/icons8-directory-64.png</normaloff>resource/icon/icons8-directory-64.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/resource/icon/icons8-directory-64.png</normaloff>:/icons/resource/icon/icons8-directory-64.png</iconset>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_camera_capture">
    <property name="geometry">
     <rect>
      <x>550</x>
-     <y>440</y>
+     <y>420</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -99,15 +99,15 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>resource/icon/icons8-camera-50.png</normaloff>resource/icon/icons8-camera-50.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/resource/icon/icons8-camera-50.png</normaloff>:/icons/resource/icon/icons8-camera-50.png</iconset>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_image_search">
    <property name="geometry">
     <rect>
      <x>550</x>
-     <y>380</y>
+     <y>360</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -128,33 +128,15 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>resource/icon/icons8-search-50.png</normaloff>resource/icon/icons8-search-50.png</iconset>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_today_price">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>60</y>
-     <width>361</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>13</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>오늘의 거래 가격, 최근 거래 가격</string>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/resource/icon/icons8-search-50.png</normaloff>:/icons/resource/icon/icons8-search-50.png</iconset>
    </property>
   </widget>
   <widget class="QFrame" name="searchframe">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>10</y>
+     <x>740</x>
+     <y>30</y>
      <width>431</width>
      <height>52</height>
     </rect>
@@ -211,7 +193,7 @@ border: 2px solid #000000;
    <property name="geometry">
     <rect>
      <x>549</x>
-     <y>259</y>
+     <y>239</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -236,10 +218,22 @@ border: 2px solid #000000;
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>620</y>
-     <width>561</width>
-     <height>191</height>
+     <y>590</y>
+     <width>580</width>
+     <height>190</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>580</width>
+     <height>190</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>580</width>
+     <height>190</height>
+    </size>
    </property>
    <property name="styleSheet">
     <string notr="true">border-radius: 15px;
@@ -248,10 +242,10 @@ background-color:#e9ecef;</string>
    <widget class="QTextBrowser" name="table_info">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>40</y>
+      <x>30</x>
+      <y>50</y>
       <width>520</width>
-      <height>101</height>
+      <height>121</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -270,35 +264,78 @@ background-color:#e9ecef;</string>
      <string notr="true">line-height: 300%;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_deatil_info_title">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>76</width>
-      <height>23</height>
+      <width>96</width>
+      <height>27</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>상세 정보</string>
-    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-information-50.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_deatil_info_title">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>상세 정보</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QWidget" name="widget_2" native="true">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>820</y>
-     <width>561</width>
-     <height>171</height>
+     <x>20</x>
+     <y>790</y>
+     <width>580</width>
+     <height>190</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>580</width>
+     <height>190</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>580</width>
+     <height>190</height>
+    </size>
    </property>
    <property name="styleSheet">
     <string notr="true">QWidget
@@ -312,13 +349,19 @@ background-color:#e9ecef;
      <rect>
       <x>20</x>
       <y>50</y>
-      <width>520</width>
-      <height>91</height>
+      <width>530</width>
+      <height>121</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>520</width>
+      <width>530</width>
       <height>16777215</height>
      </size>
     </property>
@@ -327,32 +370,63 @@ background-color:#e9ecef;
 background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_test_result_title">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>166</width>
-      <height>23</height>
+      <width>192</width>
+      <height>27</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>수산물 방사능 검사 결과</string>
-    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-radioactive-50.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_test_result_title">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>수산물 방사능 검사 결과</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QLabel" name="label_image_search_title">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>90</y>
+     <y>80</y>
      <width>131</width>
      <height>23</height>
     </rect>
@@ -365,78 +439,16 @@ background-color: rgb(255, 255, 255);</string>
     </font>
    </property>
    <property name="text">
-    <string>이미지로 검색하기</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="line_detect">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>583</y>
-     <width>520</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>520</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>520</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_camera">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>128</y>
-     <width>520</width>
-     <height>440</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>520</width>
-     <height>440</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>520</width>
-     <height>440</height>
-    </size>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:white</string>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>resource/icon/icons8-camera-50 (1).png</pixmap>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <string>이미지로 검색</string>
    </property>
   </widget>
   <widget class="QWidget" name="widget_4" native="true">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>590</y>
-     <width>571</width>
-     <height>391</height>
+     <x>620</x>
+     <y>600</y>
+     <width>560</width>
+     <height>380</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -446,8 +458,8 @@ background-color:#e9ecef;</string>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>50</y>
+      <x>20</x>
+      <y>60</y>
       <width>521</width>
       <height>301</height>
      </rect>
@@ -462,7 +474,7 @@ background-color:#e9ecef;</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string>graph</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -470,26 +482,6 @@ background-color:#e9ecef;</string>
       </widget>
      </item>
     </layout>
-   </widget>
-   <widget class="QLabel" name="label_graph_title">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>11</y>
-      <width>121</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>가격 변동 그래프</string>
-    </property>
    </widget>
    <widget class="QPushButton" name="btn_graph_onoff">
     <property name="geometry">
@@ -519,14 +511,65 @@ background-color:#e9ecef;</string>
      <string>on</string>
     </property>
    </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>144</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-graph-48.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_graph_title">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>가격 변동 그래프</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QWidget" name="widget_3" native="true">
    <property name="geometry">
     <rect>
      <x>620</x>
-     <y>90</y>
-     <width>561</width>
-     <height>481</height>
+     <y>110</y>
+     <width>560</width>
+     <height>480</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -558,31 +601,11 @@ background-color:#e9ecef;</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_price_info_title">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>10</y>
-      <width>76</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>가격 정보</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>80</y>
+      <y>90</y>
       <width>511</width>
       <height>32</height>
      </rect>
@@ -699,8 +722,8 @@ border-radius: 0px;</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>resource/icon/icons8-search-50.png</normaloff>resource/icon/icons8-search-50.png</iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/icons/resource/icon/icons8-search-50.png</normaloff>:/icons/resource/icon/icons8-search-50.png</iconset>
        </property>
       </widget>
      </item>
@@ -710,7 +733,7 @@ border-radius: 0px;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>40</y>
+      <y>50</y>
       <width>511</width>
       <height>27</height>
      </rect>
@@ -845,13 +868,131 @@ border-radius: 0px;</string>
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>10</y>
+      <width>96</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-price-50.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_price_info_title">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>가격 정보</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>110</y>
+     <width>522</width>
+     <height>473</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="label_camera">
+      <property name="minimumSize">
+       <size>
+        <width>520</width>
+        <height>440</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>520</width>
+        <height>440</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:white</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resources.qrc">:/icons/resource/icon/icons8-camera-50 (1).png</pixmap>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="line_detect">
+      <property name="minimumSize">
+       <size>
+        <width>520</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>520</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <zorder>btn_clear_data</zorder>
   <zorder>widget</zorder>
   <zorder>btn_directory</zorder>
   <zorder>btn_camera_capture</zorder>
   <zorder>btn_image_search</zorder>
-  <zorder>label_today_price</zorder>
   <zorder>searchframe</zorder>
   <zorder>btn_camera_onoff</zorder>
   <zorder>widget_2</zorder>

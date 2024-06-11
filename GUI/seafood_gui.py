@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 from PyQt5 import uic
 from PyQt5.QtWidgets import QStackedWidget
 import datetime
-from PyQt5.QtCore import pyqtSignal, QThread
+from PyQt5.QtCore import pyqtSignal, QThread, QDate
 import time
 import cv2
 
@@ -45,6 +45,10 @@ class WindowClass(QMainWindow, from_class):
         self.setFixedSize(1200, 1000)   #fix size
 
         self.table_test_result.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        today = QDate.currentDate()
+        self.edit_filter_end_date.setDate(today)
+        self.edit_filter_start_date.setDate(today)
 
         self.pixmap = QPixmap()
         self.camera = Camera()
