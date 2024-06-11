@@ -27,10 +27,10 @@ import os
 label_mapping = {
     0: "우럭",
     1: "갈치",
-    2: "가자미",
-    3: "도미",
-    4: "아귀",
-    5: "고등어"
+    2: "도미",
+    3: "아귀",
+    4: "고등어",
+    5: "광어"
 }
 
 
@@ -90,7 +90,7 @@ class WindowClass(QMainWindow, from_class):
         #self.show_price()
         #self.graph_draw()
 
-        self.model = YOLO("Fish_model/yolov8n.pt")
+        self.model = YOLO("Fish_model/segment/train4/weights/best.pt")
 
         self.f = open("./segment_log.txt", "w+")
         self.track_history = defaultdict(lambda: [])
@@ -120,6 +120,7 @@ class WindowClass(QMainWindow, from_class):
                                 self.having_label.append(label_name)
                             
                 self.line_detect.setText(', '.join(self.having_label))
+                self.line_search.setText(', '.join(self.having_label))
                 print(self.having_label)
 
                 self.f.write('boxes : ' + str(boxes))
@@ -153,6 +154,7 @@ class WindowClass(QMainWindow, from_class):
             self.camera.start()
             self.camera.running = True
             self.load_image_status = False
+            self.having_label = []
 
         else:   #self.btn_camera_status == True #to stop
             self.btn_camera_status = False
@@ -172,6 +174,9 @@ class WindowClass(QMainWindow, from_class):
         self.camera.running = False
         
         file = QFileDialog.getOpenFileName(filter="image (*.*)")
+        if self.having_label != None:
+            self.having_label = []
+            
         self.image = cv2.imread(file[0])
         self.image = cv2.resize(self.image, (self.label_camera.width(), self.label_camera.height()))
 
@@ -189,6 +194,7 @@ class WindowClass(QMainWindow, from_class):
                         self.having_label.append(label_name)
 
         self.line_detect.setText(', '.join(self.having_label))
+        self.line_search.setText(', '.join(self.having_label))
         print(self.having_label)
 
         self.f.write('boxes : ' + str(boxes))
