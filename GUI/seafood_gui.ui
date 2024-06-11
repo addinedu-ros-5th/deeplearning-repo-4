@@ -333,8 +333,6 @@ border: 2px solid #000000;
     </item>
    </layout>
   </widget>
-<<<<<<< HEAD
-=======
   <widget class="QComboBox" name="cb_filter_species">
    <property name="geometry">
     <rect>
@@ -382,7 +380,6 @@ border: 2px solid #000000;
      <normaloff>resource/icon/icons8-search-50.png</normaloff>resource/icon/icons8-search-50.png</iconset>
    </property>
   </widget>
->>>>>>> f9863bd18522902a795d7dadc8a51689402b58a9
   <widget class="QPushButton" name="btn_camera_onoff">
    <property name="geometry">
     <rect>
@@ -609,8 +606,8 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QWidget" name="widget_3" native="true">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>110</y>
+     <x>200</x>
+     <y>410</y>
      <width>561</width>
      <height>481</height>
     </rect>
@@ -664,7 +661,7 @@ background-color:#e9ecef;</string>
      <string>가격 정보</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -812,7 +809,7 @@ border-radius: 0px;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -1042,9 +1039,19 @@ background-color:#e9ecef;</string>
     </property>
    </widget>
   </widget>
+  <zorder>verticalLayoutWidget</zorder>
+  <zorder>btn_price_onoff</zorder>
+  <zorder>label_price_info_title</zorder>
+  <zorder>table_price</zorder>
+  <zorder>cb_filter_origins</zorder>
+  <zorder>edit_filter_start_date</zorder>
+  <zorder>btn_clear_data</zorder>
+  <zorder>cb_filter_species</zorder>
+  <zorder>cb_filter_packaging</zorder>
+  <zorder>cb_filter_keywords</zorder>
+  <zorder>btn_table_price_search</zorder>
   <zorder>widget_3</zorder>
   <zorder>widget</zorder>
-  <zorder>btn_camera_clear</zorder>
   <zorder>btn_directory</zorder>
   <zorder>btn_camera_caoture</zorder>
   <zorder>btn_image_search</zorder>
