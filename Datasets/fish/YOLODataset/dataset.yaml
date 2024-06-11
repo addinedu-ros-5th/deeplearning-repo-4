@@ -1,0 +1,4 @@
+train: ./deeplearning-repo-4/Datasets/fish/YOLODataset/images/train/
+val: ./deeplearning-repo-4/Datasets/fish/YOLODataset/images/val/
+nc: 6
+names: ["uleog", "galchi", "domi", "agwi", "godeungeo", "gwangeo"]

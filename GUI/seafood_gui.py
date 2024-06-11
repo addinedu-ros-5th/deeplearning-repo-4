@@ -24,7 +24,6 @@ from db_connect import DB_CONFIG
 from ultralytics import YOLO
 from collections import defaultdict
 import os
-
 label_mapping = {
     0: "우럭",
     1: "갈치",
@@ -58,6 +57,7 @@ class WindowClass(QMainWindow, from_class):
         self.btn_camera_status = False   #False:off, True:on
         self.btn_graph_status = False
         self.btn_price_status = False
+        self.load_image_status = False
 
         self.btn_camera_onoff.setText("on")
         self.btn_graph_onoff.setText("on")
@@ -71,6 +71,9 @@ class WindowClass(QMainWindow, from_class):
         self.line_search.returnPressed.connect(self.search_bar)
         self.btn_price_onoff.clicked.connect(self.show_price)
         self.btn_table_price_search.clicked.connect(self.filtered_price_table)
+        self.btn_directory.clicked.connect(self.load_image)
+        self.btn_camera_caoture.clicked.connect(self.capture)
+        self.btn_clear_data.clicked.connect(self.clear_data)
 
         self.camera.updateSignal.connect(self.camera_update)
         self.verticalLayout_graph.addWidget(self.canvas)
@@ -79,8 +82,9 @@ class WindowClass(QMainWindow, from_class):
         self.camera.start()
 
         self.connect_to_database()
-        self.show_price()
-        self.graph_draw()
+        self.load_combobox_data()
+        #self.show_price()
+        #self.graph_draw()
 
         self.model = YOLO("Fish_model/yolov8n.pt")
 
@@ -91,18 +95,51 @@ class WindowClass(QMainWindow, from_class):
 
 #==camera==
 
-    def camera_update(self):   #maybe input YOLO here..?
+    def camera_update(self):
         retval, self.image = self.video.read()
+        self.image = cv2.resize(self.image, (self.label_camera.width(), self.label_camera.height()))
         if retval:
-            self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
+            results_tracking = self.model.track(self.image, conf=0.5, persist=True)
+            if results_tracking is not None and len(results_tracking) > 0 and results_tracking[0] is not None and results_tracking[0].boxes is not None:
+                boxes = results_tracking[0].boxes.xywh.cpu()
+                track_ids = []
+                
+                for box in results_tracking[0].boxes:
+                    if box.id is not None:
+                        track_ids.append(box.id)
+                        label = int(box.cls.item())
+                        if label in label_mapping:
+                            label_name = label_mapping[label]
+                            
+                            if label_name not in self.having_label:                    
+                                
+                                self.having_label.append(label_name)
+                            
+                self.line_detect.setText(', '.join(self.having_label))
+                print(self.having_label)
 
-            h, w, c = self.image.shape
-            qimage = QImage(self.image.data, w, h, w*c, QImage.Format_RGB888)
+                self.f.write('boxes : ' + str(boxes))
+                self.f.write('track_ids : ' + str(track_ids))
 
-            self.pixmap = self.pixmap.fromImage(qimage)
-            self.pixmap_camera = self.pixmap.scaled(self.label_camera.width(), self.label_camera.height())
+                annotated_frame = results_tracking[0].plot()
+                height, width, channel = annotated_frame.shape   #opencv -> Qpixmap
+                bytesPerLine = 3 * width
+                QImg = QImage(annotated_frame.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
+                self.pixmap_camera = QPixmap.fromImage(QImg)
 
-            self.label_camera.setPixmap(self.pixmap_camera)
+                self.label_camera.setPixmap(self.pixmap_camera)
+
+                for box, track_id in zip(boxes, track_ids):
+                    x, y, w, h = box
+                    track = self.track_history[track_id]
+                    track.append((float(x), float(y)))
+                    if len(track) > 30: # retain 90 tracks for 90 frames
+                        track.pop(0)
+            else:
+                print("No objects found in the tracking results_tracking.")   # 객체가 없는 경우
+        else:
+            print("Failed to read video frame.")
+
 
     def camera_onoff(self):
         if self.btn_camera_status == False:   #to run
@@ -111,6 +148,7 @@ class WindowClass(QMainWindow, from_class):
 
             self.camera.start()
             self.camera.running = True
+            self.load_image_status = False
 
         else:   #self.btn_camera_status == True #to stop
             self.btn_camera_status = False
@@ -119,6 +157,74 @@ class WindowClass(QMainWindow, from_class):
             self.video.release
             self.camera.running = False
             self.label_camera.clear()
+
+
+    def load_image(self):
+        self.load_image_status = True
+        self.btn_camera_status = False
+        self.btn_camera_onoff.setText("on")
+
+        self.video.release
+        self.camera.running = False
+        
+        file = QFileDialog.getOpenFileName(filter="image (*.*)")
+        self.image = cv2.imread(file[0])
+        self.image = cv2.resize(self.image, (self.label_camera.width(), self.label_camera.height()))
+
+        results_detect = self.model.track(self.image, conf=0.5, persist=True)
+        boxes = results_detect[0].boxes.xywh.cpu()
+        track_ids = []
+
+        for box in results_detect[0].boxes:
+            if box.id is not None:
+                track_ids.append(box.id)
+                label = int(box.cls.item())
+                if label in label_mapping:
+                    label_name = label_mapping[label]
+                    
+                    if label_name not in self.having_label:                    
+                        
+                        self.having_label.append(label_name)
+                            
+        self.line_detect.setText(', '.join(self.having_label))
+        print(self.having_label)
+
+        self.f.write('boxes : ' + str(boxes))
+        self.f.write('track_ids : ' + str(track_ids))
+
+        annotated_frame = results_detect[0].plot()
+
+        height, width, channel = annotated_frame.shape
+        bytesPerLine = 3 * width
+        QImg = QImage(annotated_frame.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
+        self.pixmap_camera = QPixmap.fromImage(QImg)
+
+        self.label_camera.setPixmap(self.pixmap_camera)
+
+
+    def capture(self):
+        if self.btn_camera_status == True or self.load_image_status == True:
+
+            self.now = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            folder_path = "taken/"
+            input_filename = os.path.join(folder_path, self.now + ".jpg")
+
+            if not os.path.exists(folder_path):
+                os.makedirs(folder_path)
+
+            cap_qimage = self.pixmap_camera.toImage()
+            cap_qimage = cap_qimage.convertToFormat(QImage.Format_RGB32)
+
+            width = cap_qimage.width()
+            height = cap_qimage.height()
+            ptr = cap_qimage.bits()
+            ptr.setsize(height * width * 4)
+            arr = np.array(ptr).reshape(height, width, 4)
+            cv_image = cv2.cvtColor(arr, cv2.COLOR_BGRA2BGR)
+            
+            cv2.imwrite(input_filename, cv_image)
+        else:
+            print("camera off")
 
 #==graph==
 
@@ -209,26 +315,26 @@ class WindowClass(QMainWindow, from_class):
 
 #==price==
     def show_price(self):
-        if self.btn_camera_status == False:
-            if self.btn_price_status == False:   #to run
-                self.btn_price_status = True
-                self.btn_price_onoff.setText("off")
-                if not connection.is_connected():
-                    self.connect_to_database()
-                query = """
-                SELECT * FROM auction_price_data ORDER BY date DESC LIMIT 10;
-                """
-                columns, results = self.search_query(query)
-                if results:
-                    self.display_table_data(self.table_price, columns, results)
-                else:
-                    print("No data found.")
-                self.show_test_result()
+        #if self.btn_camera_status == False:
+        if self.btn_price_status == False:   #to run
+            self.btn_price_status = True
+            self.btn_price_onoff.setText("off")
+            if not connection.is_connected():
+                self.connect_to_database()
+            query = """
+            SELECT * FROM auction_price_data ORDER BY date DESC LIMIT 10;
+            """
+            columns, results = self.search_query(query)
+            if results:
+                self.display_table_data(self.table_price, columns, results)
+            else:
+                print("No data found.")
+            self.show_test_result()
 
-            else:   #to stop
-                self.btn_price_status = False
-                self.btn_price_onoff.setText("on")
-                self.table_price.clear()
+        else:   #to stop
+            self.btn_price_status = False
+            self.btn_price_onoff.setText("on")
+            self.table_price.clear()
 
     def display_table_data(self, table, columns, results):
         table.setRowCount(len(results))
@@ -239,13 +345,44 @@ class WindowClass(QMainWindow, from_class):
             for col_idx, col_data in enumerate(row_data):
                 table.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))
 
+    def load_combobox_data(self):
+        if connection and connection.is_connected():
+            cursor = connection.cursor()
+
+            cursor.execute("SELECT DISTINCT species FROM auction_price_data")
+            species = cursor.fetchall()
+            self.cb_filter_species.addItem("전체")
+            for item in species:
+                self.cb_filter_species.addItem(item[0])
+
+            cursor.execute("SELECT DISTINCT origin FROM auction_price_data")
+            origins = cursor.fetchall()
+            self.cb_filter_origins.addItem("전체")
+            for item in origins:
+                self.cb_filter_origins.addItem(item[0])
+
     def filtered_price_table(self):
         start_date =  self.edit_filter_start_date.text()
         end_date = self.edit_filter_end_date.text()
-        origin = self.cb_filter_origins.currentText()
+        origins = self.cb_filter_origins.currentText()
         species = self.cb_filter_species.currentText()
         packaging = self.cb_filter_packaging.currentText()
         keywords =  self.cb_filter_keywords.currentText()
+
+
+        table = "auction_price_data"
+        species = ["넙치", "암꽃게"]
+        size = "대"
+        start_date = "2020-01-01"
+        end_date = "2023-12-31"
+        origins = ["태안"]
+        keywords = ["활"]
+
+        query = self.generate_query(table, species, size, start_date, end_date, origins, keywords)
+        columns, results = self.search_query(query)
+        if results :
+            self.display_table_data(self.table_price, columns, results)
+
 
 #==test==
 
@@ -256,6 +393,41 @@ class WindowClass(QMainWindow, from_class):
         columns, results = self.search_query(query)
         if results:
             self.display_table_data(self.table_test_result, columns, results)
+
+
+#==clear==
+    def clear_data(self):
+        self.btn_camera_status = False   #camera off
+        self.btn_camera_onoff.setText("on")
+        self.video.release
+        self.camera.running = False
+        self.label_camera.clear()
+
+        self.line_detect.clear()   #label keyword delete
+        self.having_label = []
+
+        self.line_search.clear()   #search and info clear
+        self.table_info.clear()
+        
+        self.btn_price_status == False   #price clear
+        self.btn_price_onoff.setText("on")
+        self.table_test_result.clear()
+        if connection.is_connected():
+            connection.close()
+        self.table_price.clear()
+
+        self.canvas.setVisible(False)   
+        self.btn_graph_onoff.setText("on")   #graph hide   #graph clear check please
+        self.btn_graph_status = False
+        # x = 10
+        # y = 10
+        # ax = self.fig.add_subplot(111)
+        # ax.plot(x, y, label="price")
+        # ax.set_xlabel("x")
+        # ax.set_xlabel("y")
+        # ax.set_title("my graph")
+        # ax.legend()
+        # self.canvas.draw()
 
 #==========================
 
@@ -271,7 +443,7 @@ class WindowClass(QMainWindow, from_class):
     #   sql_query = generate_query(table, species, size, start_date, end_date, origins, keywords)
     #   print(sql_query)
 
-    def generate_query(table, species=None, size=None, start_date=None, end_date=None, origins=None, keywords=None):
+    def generate_query(self, table, species=None, size=None, start_date=None, end_date=None, origins=None, keywords=None):
         base_query = f"SELECT * FROM {table} WHERE"
         conditions = []
 

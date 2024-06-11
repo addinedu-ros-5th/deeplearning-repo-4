@@ -1,0 +1,4 @@
+train: /Users/yohan/Desktop/dev_ws/deeplearning-repo-4/Datasets/seafood/YOLODataset/images/train/
+val: /Users/yohan/Desktop/dev_ws/deeplearning-repo-4/Datasets/seafood/YOLODataset/images/val/
+nc: 9
+names: ["uleog", "galchi", "domi", "jeonbog", "ojingeo", "crab", "agwi", "godeungeo", "gwangeo"]
