@@ -12,6 +12,7 @@ import cv2
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.ticker import ScalarFormatter
 import numpy as np
 import json
 
@@ -90,7 +91,7 @@ class WindowClass(QMainWindow, from_class):
         self.connect_to_database()
         self.load_combobox_data()
         self.show_price()
-        self.graph_draw()
+        self.draw_graph()
 
         self.model = YOLO("Fish_model/Seafood_segment/train22/weights/best.pt")   #train22
 
@@ -241,7 +242,7 @@ class WindowClass(QMainWindow, from_class):
             self.btn_graph_onoff.setText("off")
             
             self.canvas.setVisible(True)
-            self.graph_draw()
+            self.draw_graph()
             
         else:   #self.btn_graph_status == True   #to stop
             self.btn_graph_status = False
@@ -249,7 +250,7 @@ class WindowClass(QMainWindow, from_class):
 
             self.canvas.setVisible(False)
 
-    def graph_draw(self):   #test
+    def draw_graph(self):   #test
         select = """SELECT species,
                         DATE_FORMAT(date, '%Y-%m') AS month,
                         SUM(quantity * average) AS total_amount,
@@ -258,21 +259,24 @@ class WindowClass(QMainWindow, from_class):
         self.filtered_combo()
         query = self.generate_query('auction_price_data', select, self.species, self.fish_size, self.start_date, self.end_date, self.origins, self.keywords)
         query +=""" GROUP BY species, month ORDER BY month;"""
-        print(query)
         columns, results = self.search_query(query)
         df = pd.DataFrame(results)
         df.columns = columns
 
         x = df['month']
         y = df['monthly_average']
+        print(df)
 
         self.fig.clear()
         ax = self.fig.add_subplot(111)
         ax.plot(x, y, label="price")
+        ax.get_yaxis().set_major_formatter(ScalarFormatter(useOffset=False, useMathText=False))
+        ax.ticklabel_format(style='plain', axis='y')
+
         ax.set_xlabel("x")
         ax.set_ylabel("y")
 
-        ax.set_title("my graph")
+        ax.set_title("")
         ax.legend()
 
         self.canvas.draw()
@@ -374,7 +378,6 @@ class WindowClass(QMainWindow, from_class):
         self.origins = [self.cb_filter_origins.currentText()]
         self.species = [self.cb_filter_species.currentText()]
         self.fish_size = [self.cb_filter_size.currentText()]
-        print(self.fish_size)
         self.keywords = [self.cb_filter_keywords.currentText()]
 
 
@@ -386,7 +389,7 @@ class WindowClass(QMainWindow, from_class):
         columns, results = self.search_query(query)
         if results :
             self.display_table_data(self.table_price, columns, results)
-        self.graph_draw()
+        self.draw_graph()
 
 
 #==test==
@@ -458,11 +461,10 @@ class WindowClass(QMainWindow, from_class):
             conditions.append(f"({keywords_condition})")
 
         if species != ['전체']: # 넙치, 암꽃게, 오징어
-            species_condition = " OR ".join([f"species LIKE '%{specie}%'" for specie in species])
+            species_condition = " OR ".join([f"species LIKE '%{specie}'" for specie in species])
             conditions.append(f"({species_condition})")
 
         if fish_size != ['전체']:    # 대, 중, 소, kg, box
-            print(fish_size[0])
             conditions.append(f"size = '{fish_size[0]}'")
 
         if start_date and end_date: # 2024-06-09
@@ -475,7 +477,6 @@ class WindowClass(QMainWindow, from_class):
             conditions.append(f"({origin_condition})")
 
         query = f"{base_query} {' AND '.join(conditions)}"
-        print(query)
         return query
     ####
 
