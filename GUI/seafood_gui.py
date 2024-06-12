@@ -246,19 +246,15 @@ class WindowClass(QMainWindow, from_class):
             self.canvas.setVisible(False)
 
     def graph_draw(self):   #test
-        query = """
-                SELECT
-                    species,
-                    DATE_FORMAT(date, '%Y-%m') AS month,
-                    SUM(quantity * average) AS total_amount,
-                    SUM(quantity) AS total_quantity,
-                    SUM(quantity * average) / SUM(quantity) AS monthly_average
-                FROM auction_price_data
-                WHERE
-                    species LIKE "(활)암꽃게" AND
-                    date BETWEEN '2009-01-01' AND '2023-12-31'
-                GROUP BY species, month ORDER BY month;
-                """
+        select = """SELECT species,
+                        DATE_FORMAT(date, '%Y-%m') AS month,
+                        SUM(quantity * average) AS total_amount,
+                        SUM(quantity) AS total_quantity,
+                        SUM(quantity * average) / SUM(quantity) AS monthly_average"""
+        self.filtered_combo()
+        query = self.generate_query('auction_price_data', select, self.species, self.fish_size, self.start_date, self.end_date, self.origins, self.keywords)
+        query +=""" GROUP BY species, month ORDER BY month;"""
+        print(query)
         columns, results = self.search_query(query)
         df = pd.DataFrame(results)
         df.columns = columns
@@ -304,7 +300,7 @@ class WindowClass(QMainWindow, from_class):
 
                 self.table_info.append(searched_fish_info_str)
             else:
-                QMessageBox.information(self, "check again", "'%s'에 대한 검색결과가 없습니다.\n다시 입력해주세요." %searched_text)
+                self.table_info.setText("'%s'에 대한 검색결과가 없습니다.\n다시 입력해주세요." %searched_text)
 
 
 #==price==
@@ -362,28 +358,29 @@ class WindowClass(QMainWindow, from_class):
                 self.cb_filter_keywords.addItem(item)
 
 
-            size = ['전체', '대', '중', '소']
-            for item in size:
+            fish_size = ['전체', '대', '중', '소']
+            for item in fish_size:
                 self.cb_filter_size.addItem(item)
+
+    def filtered_combo(self) :
+        self.start_date =  self.edit_filter_start_date.text()
+        self.end_date = self.edit_filter_end_date.text()
+        self.origins = [self.cb_filter_origins.currentText()]
+        self.species = [self.cb_filter_species.currentText()]
+        self.fish_size = [self.cb_filter_size.currentText()]
+        print(self.fish_size)
+        self.keywords = [self.cb_filter_keywords.currentText()]
 
 
     def filtered_price_table(self):
-        start_date =  self.edit_filter_start_date.text()
-        end_date = self.edit_filter_end_date.text()
-        origins = [self.cb_filter_origins.currentText()]
-        species = [self.cb_filter_species.currentText()]
-        size = [self.cb_filter_size.currentText()]
-        keywords =  [self.cb_filter_keywords.currentText()]
-
-        keywords =  list(self.cb_filter_keywords.currentText())
-
+        self.filtered_combo()
         table = "auction_price_data"
-
-        query = self.generate_query(table, species, size, start_date, end_date, origins, keywords)
-        print(query)
+        query = self.generate_query(table, 'SELECT *', self.species, self.fish_size, self.start_date, self.end_date, self.origins, self.keywords)
+        query +=  "ORDER BY date DESC LIMIT 50"
         columns, results = self.search_query(query)
         if results :
             self.display_table_data(self.table_price, columns, results)
+        self.graph_draw()
 
 
 #==test==
@@ -442,14 +439,15 @@ class WindowClass(QMainWindow, from_class):
     #   end_date = "2023-12-31"
     #   origins = ["태안"]
     #   keywords = ["활"]
-    #   sql_query = generate_query(table, species, size, start_date, end_date, origins, keywords)
+    #   sql_query = generate_query(table, select, species, size, start_date, end_date, origins, keywords)
     #   print(sql_query)
 
-    def generate_query(self, table, species=None, size=None, start_date=None, end_date=None, origins=None, keywords=None):
-        base_query = f"SELECT * FROM {table} WHERE"
+    def generate_query(self, table, select=None, species=None, fish_size=None, start_date=None, end_date=None, origins=None, keywords=None):
+
+        base_query = f"{select} FROM {table} WHERE"
         conditions = []
 
-        if keywords != ['전']: # 활, 냉, 선
+        if keywords != ['전체']: # 활, 냉, 선
             keywords_condition = (f"species LIKE '({keywords[0]})%'")
             conditions.append(f"({keywords_condition})")
 
@@ -457,8 +455,9 @@ class WindowClass(QMainWindow, from_class):
             species_condition = " OR ".join([f"species LIKE '%{specie}%'" for specie in species])
             conditions.append(f"({species_condition})")
 
-        if size != ['전체']:    # 대, 중, 소, kg, box
-            conditions.append(f"size = '{size}'")
+        if fish_size != ['전체']:    # 대, 중, 소, kg, box
+            print(fish_size[0])
+            conditions.append(f"size = '{fish_size[0]}'")
 
         if start_date and end_date: # 2024-06-09
             if start_date > end_date:
@@ -469,7 +468,8 @@ class WindowClass(QMainWindow, from_class):
             origin_condition = " OR ".join([f"origin = '{origin}'" for origin in origins])
             conditions.append(f"({origin_condition})")
 
-        query = f"{base_query} {' AND '.join(conditions)} ORDER BY date DESC LIMIT 50"
+        query = f"{base_query} {' AND '.join(conditions)}"
+        print(query)
         return query
     ####
 
