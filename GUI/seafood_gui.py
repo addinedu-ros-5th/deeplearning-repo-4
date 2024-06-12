@@ -262,13 +262,15 @@ class WindowClass(QMainWindow, from_class):
         x = df['month']
         y = df['monthly_average']
 
+        self.fig.clear()
         ax = self.fig.add_subplot(111)
         ax.plot(x, y, label="price")
         ax.set_xlabel("x")
-        ax.set_xlabel("y")
+        ax.set_ylabel("y")
 
         ax.set_title("my graph")
         ax.legend()
+
         self.canvas.draw()
 
 #==search==
