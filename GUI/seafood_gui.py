@@ -265,14 +265,12 @@ class WindowClass(QMainWindow, from_class):
 
         x = df['month']
         y = df['monthly_average']
-        print(df)
 
         self.fig.clear()
         ax = self.fig.add_subplot(111)
         ax.plot(x, y, label="price")
         ax.get_yaxis().set_major_formatter(ScalarFormatter(useOffset=False, useMathText=False))
         ax.ticklabel_format(style='plain', axis='y')
-
         ax.set_xlabel("x")
         ax.set_ylabel("y")
 
@@ -456,8 +454,8 @@ class WindowClass(QMainWindow, from_class):
         base_query = f"{select} FROM {table} WHERE"
         conditions = []
 
-        if keywords != ['전체']: # 활, 냉, 선
-            keywords_condition = (f"species LIKE '({keywords[0]})%'")
+        if keywords != ['전체']: # 활, 냉, 선\
+            keywords_condition = (f"species LIKE '({keywords[0][0]})%'")
             conditions.append(f"({keywords_condition})")
 
         if species != ['전체']: # 넙치, 암꽃게, 오징어
