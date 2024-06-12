@@ -28,9 +28,12 @@ label_mapping = {
     0: "우럭",
     1: "갈치",
     2: "도미",
-    3: "아귀",
-    4: "고등어",
-    5: "광어"
+    3: "전복",
+    4: "오징어",
+    5: "게",
+    6: "아귀",
+    7: "고등어",
+    8: "광어"
 }
 
 
@@ -89,7 +92,7 @@ class WindowClass(QMainWindow, from_class):
         self.show_price()
         self.graph_draw()
 
-        self.model = YOLO("Fish_model/segment/train4/weights/best.pt")
+        self.model = YOLO("Fish_model/Seafood_segment/train22/weights/best.pt")   #train22
 
         self.f = open("./segment_log.txt", "w+")
         self.track_history = defaultdict(lambda: [])
@@ -183,6 +186,7 @@ class WindowClass(QMainWindow, from_class):
             if box.id is not None:
                 track_ids.append(box.id)
                 label = int(box.cls.item())
+                #print(box.cls)
                 if label in label_mapping:
                     label_name = label_mapping[label]
                     if label_name not in self.having_label:
