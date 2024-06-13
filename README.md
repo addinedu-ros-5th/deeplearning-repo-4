@@ -5,11 +5,13 @@ DeepLearning Project Team. 4
 Service list
   - Marine product classification
   - Pricing infomation
-  - Radiation contamination monitor results
+  - Radiation contamination monitor results\
 
-June/5th/2024 ~ June/13th/2024
-Classification speices : 
-  abalone, angler, cutlassfish, crab, flatfish, rockfish, mackerel, snapper, squid
+Classification speices :
+  - abalone, angler, cutlassfish, crab, flatfish, rockfish, mackerel, snapper, squid
+
+Project Duration :
+  - June/5th/2024 ~ June/13th/2024\
 
 ### WorkSpace
 |||
