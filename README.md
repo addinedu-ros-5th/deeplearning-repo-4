@@ -1,8 +1,15 @@
 # Marine Product Classification and Infomation Service Program
 DeepLearning Project Team. 4
 
-### Infomation
-2024년 06월 5일 ~ 2024년 06월 12일
+### Main
+Service list
+  - Marine product classification
+  - Pricing infomation
+  - Radiation contamination monitor results
+
+June/5th/2024 ~ June/13th/2024
+Classification speices : 
+  abalone, angler, cutlassfish, crab, flatfish, rockfish, mackerel, snapper, squid
 
 ### WorkSpace
 |||
@@ -14,18 +21,14 @@ DeepLearning Project Team. 4
 |design|UML, PyQt5|
 |||
 
-### 목적 및 방향
-
-
 ### Participants
-|이름|역할|담당|
+|Name|Role|in charge|
 |:---:|:---|:---|
-|[한영철](https://github.com/OProcessing)|||
-|[김요한](https://github.com/yohankim0423)|||
-|[박서연](https://github.com/seoyean)|||
-|[이민영](https://github.com/whiteblue7)|||
-|[장형준](https://github.com/JangHyoengJun-0523)|||
-
+|[한영철](https://github.com/OProcessing)|Team Leader|Planning, Designm, Database manage|
+|[김요한](https://github.com/yohankim0423)|member|YOLO, Data processing|
+|[박서연](https://github.com/seoyean)|member|GUI design, Data processing|
+|[이민영](https://github.com/whiteblue7)|member|Camera Vision, Data processing|
+|[장형준](https://github.com/JangHyoengJun-0523)|member, PT|Archive, OCR|
 
 ### Error Handle
 
